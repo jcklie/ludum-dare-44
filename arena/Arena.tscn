@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://tiles/Tiles.tres" type="TileSet" id=1]
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://weapons/minigun/Minigun.tscn" type="PackedScene" id=3]
 
-[node name="World" type="Node2D"]
+[node name="Arena" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
@@ -12,4 +14,15 @@ tile_data = PoolIntArray( 0, 9, 0, 1, 9, 0, 2, 9, 0, 3, 9, 0, 4, 9, 0, 5, 9, 0, 
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="Player1" parent="." instance=ExtResource( 2 )]
+position = Vector2( 192, 160 )
+player_id = 1
+
+[node name="Weapon" parent="Player1" instance=ExtResource( 3 )]
+
+[node name="Player2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 736, 96 )
+player_id = 2
+skin = "yen"
 
