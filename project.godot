@@ -16,7 +16,15 @@ _global_script_class_icons={
 [application]
 
 config/name="ludum-dare-44"
+run/main_scene="res://World.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/height=576
+window/dpi/allow_hidpi=true
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [rendering]
 
