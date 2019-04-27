@@ -9,3 +9,4 @@ export_presets.cfg
 
 # IntelliJ specific ignores
 **.idea/
+*.import
