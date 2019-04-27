@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var player = get_parent()
+var player
 
 var Projectile
 var MaxFireDelay

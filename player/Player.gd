@@ -8,7 +8,8 @@ export (int) var speed = 200
 export(String) var skin = "eur"
 var ani = IDLE
 
-onready var weapon = $Weapon
+onready var weapons = $Weapons.get_children()
+var weapon_idx = 0
 
 var velocity = Vector2()
 var direction = Vector2()
@@ -21,6 +22,7 @@ var key_right
 var key_up
 var key_down
 var key_shoot
+var key_swap_weapon
 
 # Signals
 
@@ -45,6 +47,7 @@ func _ready():
 	key_up = "player_%s_up" % player_id
 	key_down = "player_%s_down" % player_id
 	key_shoot = "player_%s_shoot" % player_id
+	key_swap_weapon = "player_%s_switch_weapon" % player_id
 	
 	set_collision_layer_bit(0, false)
 	set_collision_layer_bit(player_id, true)
@@ -66,6 +69,9 @@ func get_input():
 		velocity.y -= 1
 	if Input.is_action_pressed(key_down):
 		velocity.y += 1
+	if Input.is_action_just_released(key_swap_weapon):
+		weapon_idx = (weapon_idx + 1) % weapons.size()
+		print(weapon_idx)
 		
 	velocity = velocity.normalized() * speed
 	direction = (get_pointer_position() - global_position).normalized()
@@ -80,6 +86,7 @@ func get_pointer_position():
 	return get_global_mouse_position()
 	
 func _physics_process(delta):
+	var weapon = get_weapon()
 	if weapon && Input.is_action_pressed(key_shoot):
 		weapon.shoot(delta)
 	
@@ -90,3 +97,8 @@ func damage(damage):
 	if health < 0:
 		emit_signal("player_life_lost", player_id)
 		queue_free()
+		
+func get_weapon():
+	var weapon = weapons[weapon_idx]
+	weapon.player = self
+	return weapon
