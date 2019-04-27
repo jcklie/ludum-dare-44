@@ -54,6 +54,7 @@ func _ready():
 func _process(delta):
 	get_input()
 	select_animation()
+	update()
 
 func get_input():
 	velocity = Vector2()
