@@ -1,16 +1,35 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
+[ext_resource path="res://player/HealthBar.gd" type="Script" id=2]
+[ext_resource path="res://weapons/crossbow/Crossbow.tscn" type="PackedScene" id=3]
+[ext_resource path="res://weapons/minigun/Minigun.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 16.0
+radius = 14.0
 
 [node name="Player" type="KinematicBody2D"]
+light_mask = 0
 script = ExtResource( 1 )
+skin = "yen"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.2, 0.2 )
+
+[node name="HealthBar" type="Node2D" parent="."]
+z_index = 1
+script = ExtResource( 2 )
+
+[node name="Weapons" type="Node2D" parent="."]
+
+[node name="Crossbow" parent="Weapons" instance=ExtResource( 3 )]
+
+[node name="Minigun" parent="Weapons" instance=ExtResource( 4 )]
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
 
