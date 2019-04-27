@@ -16,7 +16,7 @@ var direction = Vector2()
 
 var health: int = 100
 
-const DASH_MAX_COOLDOWN = 2.0
+const DASH_MAX_COOLDOWN = 1.5
 var dashing : bool = false
 var dash_cooldown = 0
 
@@ -87,7 +87,6 @@ func get_input():
 	
 	if Input.is_action_just_released(key_swap_weapon):
 		weapon_idx = (weapon_idx + 1) % weapons.size()
-		print(weapon_idx)
 		
 	velocity = velocity.normalized() * speed
 	direction = (get_pointer_position() - global_position).normalized()
@@ -106,9 +105,15 @@ func _physics_process(delta):
 	if weapon && Input.is_action_pressed(key_shoot):
 		weapon.shoot(delta)
 	
-	move_and_slide(velocity)
-	
+	if not dashing:
+		move_and_slide(velocity)
+	else:
+		move_and_collide(velocity * delta)
+		
 func damage(damage):
+	if dashing:
+		return
+		
 	health -= damage
 	if health < 0:
 		emit_signal("player_life_lost", player_id)
