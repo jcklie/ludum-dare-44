@@ -24,7 +24,7 @@ for char, name in characters.items():
         parameters = {"char": '\"' + char + '\"',
                       "$fn": 100}
 
-        parameter_string = "\'" + " ".join([k + "=" + str(v) for k,v in parameters.items()]) + "\'"
+        parameter_string = "\'" + ";".join([k + "=" + str(v) for k,v in parameters.items()]) + "\'"
 
         command_parts = ["openscad",
                          f"-o {output_filename}",
