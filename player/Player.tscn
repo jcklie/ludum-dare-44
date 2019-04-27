@@ -29,3 +29,7 @@ script = ExtResource( 2 )
 
 [node name="Minigun" parent="Weapons" instance=ExtResource( 4 )]
 
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
