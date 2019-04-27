@@ -3,8 +3,9 @@ extends Node2D
 onready var player = get_parent()
 
 var Projectile
-var MaxFireDelay = .25
-var Velocity : float = 400
+var MaxFireDelay
+var Velocity : float
+var Damage : int
 
 var fireDelay : float = 0
 
@@ -17,8 +18,9 @@ func shoot(delta):
 	newProjectile.position = player.global_position
 	newProjectile.rotation = player.direction.angle()
 	newProjectile.velocity = player.direction.normalized() * Velocity
-	newProjectile.set_collision_mask_bit(player.player_id, 0)
-
+	newProjectile.player_id = player.player_id
+	newProjectile.damage = Damage
+	
 	get_tree().get_root().add_child(newProjectile)
 	fireDelay = MaxFireDelay
 	

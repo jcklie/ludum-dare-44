@@ -24,5 +24,4 @@ player_id = 1
 [node name="Player2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 736, 96 )
 player_id = 2
-skin = "yen"
 
