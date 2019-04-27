@@ -1,8 +1,12 @@
 extends KinematicBody2D
 
+const IDLE = "idle"
+const SKIN_ANGULAR_STEPS = 16
+
 export(int) var player_id
 export (int) var speed = 200
-export(Texture) var my_texture
+export(String) var skin = "eur"
+var ani = IDLE
 
 onready var weapon = $Weapon
 
@@ -17,7 +21,19 @@ var key_down
 var key_shoot
 
 func _ready():
-	get_node("Sprite").texture = my_texture
+	# load all animation sprite frames
+	var path_template = "res://player/skin/{skin}/{ani}/{step}.png"
+	var sf = SpriteFrames.new()
+	for ani in [IDLE]:
+		for ang_step in range(SKIN_ANGULAR_STEPS):
+			var ani_ang_step = ani + "_" + str(ang_step)
+			sf.add_animation(ani_ang_step)
+			# we only one frame per animation right now
+			var path = path_template.format({"skin": skin, "ani": ani, "step": ang_step})
+			sf.add_frame(ani_ang_step, load(path))
+	
+	$AnimatedSprite.frames = sf
+	
 	key_left = "player_%s_left" % player_id
 	key_right = "player_%s_right" % player_id
 	key_up = "player_%s_up" % player_id
@@ -26,8 +42,7 @@ func _ready():
 
 func _process(delta):
 	get_input()
-	
-	look_at(get_pointer_position())
+	select_animation()
 
 func get_input():
 	velocity = Vector2()
@@ -42,6 +57,14 @@ func get_input():
 		
 	velocity = velocity.normalized() * speed
 	direction = (get_pointer_position() - global_position).normalized()
+	
+func select_animation():
+	var rotation_degs = rad2deg(get_angle_to(get_global_mouse_position())) + 180
+	var ani_ang_step =  int(round(SKIN_ANGULAR_STEPS/2 + SKIN_ANGULAR_STEPS * (rotation_degs / 360.0))) % SKIN_ANGULAR_STEPS
+	print(rotation_degs)
+	var ani_name = ani + "_" + str(ani_ang_step)
+	$AnimatedSprite.animation = ani_name
+
 	
 func get_pointer_position():
 	return get_global_mouse_position()
