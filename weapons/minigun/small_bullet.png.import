@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/arrow.png-bb129e06c4341e3456df3ec76b51e545.stex"
+path="res://.import/small_bullet.png-bc6f7f9efe103c69ea0afaa6c73e9446.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://weapons/arrow.png"
-dest_files=[ "res://.import/arrow.png-bb129e06c4341e3456df3ec76b51e545.stex" ]
+source_file="res://weapons/minigun/small_bullet.png"
+dest_files=[ "res://.import/small_bullet.png-bc6f7f9efe103c69ea0afaa6c73e9446.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

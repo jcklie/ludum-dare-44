@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/small_bullet.png-2de8b60d9d0462c427fda9e0140c27da.stex"
+path="res://.import/arrow.png-615dc025b432a028c6532a232d4dddcb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://weapons/small_bullet.png"
-dest_files=[ "res://.import/small_bullet.png-2de8b60d9d0462c427fda9e0140c27da.stex" ]
+source_file="res://weapons/crossbow/arrow.png"
+dest_files=[ "res://.import/arrow.png-615dc025b432a028c6532a232d4dddcb.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
