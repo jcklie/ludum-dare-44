@@ -1,12 +1,37 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/HealthBar.gd" type="Script" id=2]
 [ext_resource path="res://weapons/crossbow/Crossbow.tscn" type="PackedScene" id=3]
 [ext_resource path="res://weapons/minigun/Minigun.tscn" type="PackedScene" id=4]
+[ext_resource path="res://player/dash_cloud.png" type="Texture" id=5]
+[ext_resource path="res://player/blood.png" type="Texture" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 14.0
+
+[sub_resource type="ParticlesMaterial" id=2]
+flag_disable_z = true
+spread = 84.31
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 4.6
+linear_accel_random = 0.13
+angle = 10.0
+angle_random = 0.33
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 1
+emission_sphere_radius = 11.3
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 275.86
+initial_velocity_random = 0.8
+angular_velocity = 99.31
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
 
 [node name="Player" type="KinematicBody2D"]
 light_mask = 0
@@ -32,4 +57,24 @@ script = ExtResource( 2 )
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="DashParticles" type="Particles2D" parent="."]
+emitting = false
+amount = 12
+lifetime = 0.3
+speed_scale = 5.0
+randomness = 1.0
+local_coords = false
+process_material = SubResource( 2 )
+texture = ExtResource( 5 )
+
+[node name="HitParticles" type="Particles2D" parent="."]
+scale = Vector2( 0.5, 0.5 )
+emitting = false
+lifetime = 0.3
+one_shot = true
+randomness = 0.23
+local_coords = false
+process_material = SubResource( 3 )
+texture = ExtResource( 6 )
 

@@ -113,6 +113,9 @@ func _physics_process(delta):
 func damage(damage):
 	if dashing:
 		return
+	
+	$HitParticles.emitting = true
+
 		
 	health -= damage
 	if health < 0:
@@ -123,11 +126,13 @@ func dash():
 	speed = 800
 	dashing = true
 	$DashTimer.start()
+	$DashParticles.emitting = true
 	
 func _on_DashTimer_timeout():
 	speed = 200
 	dashing = false
 	dash_cooldown = DASH_MAX_COOLDOWN
+	$DashParticles.emitting = false
 		
 func get_weapon():
 	var weapon = weapons[weapon_idx]
