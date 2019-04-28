@@ -5,11 +5,19 @@ var key_left
 var key_right
 var key_up
 var key_down
+
+var key_rleft
+var key_rright
+var key_rup
+var key_rdown
+
 var key_shoot
 var key_swap_weapon
 var key_special
 
 var player
+
+var last_direction = Vector2(1, 0)
 
 func _ready():
 	player = get_parent()
@@ -18,6 +26,12 @@ func _ready():
 	key_right = "player_%s_right" % player.player_id
 	key_up = "player_%s_up" % player.player_id
 	key_down = "player_%s_down" % player.player_id
+	
+	key_rleft = "player_%s_rleft" % player.player_id
+	key_rright = "player_%s_rright" % player.player_id
+	key_rup = "player_%s_rup" % player.player_id
+	key_rdown = "player_%s_rdown" % player.player_id
+	
 	key_shoot = "player_%s_shoot" % player.player_id
 	key_swap_weapon = "player_%s_switch_weapon" % player.player_id
 	key_special = "player_%s_special" % player.player_id
@@ -47,9 +61,20 @@ func process_input(delta):
 		movement.y += 1
 	
 	movement = movement.normalized()
-	var facingDirection = (get_pointer_position() - global_position).normalized()
+	var facingDirection = get_facing_direction()
 	
 	player.set_movement(movement, facingDirection)
 	
-func get_pointer_position():
-	return get_global_mouse_position()
+func get_facing_direction():
+	if player.player_id == 1:
+		return (get_global_mouse_position() - global_position).normalized()
+	else:
+		var horizontal = Input.get_action_strength(key_rright) - Input.get_action_strength(key_rleft)
+		var vertical = Input.get_action_strength(key_rdown) - Input.get_action_strength(key_rup)
+		var result = Vector2(horizontal, vertical)
+		
+		if result.length() < 0.05:
+			return last_direction
+		else:
+			last_direction = result
+			return result
