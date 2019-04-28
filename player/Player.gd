@@ -13,7 +13,8 @@ var ani = IDLE
 onready var weapons = $Weapons.get_children()
 var weapon_idx = 0
 
-var health: int = 100
+var max_health: int = 100
+onready var health = max_health
 
 const DASH_MAX_COOLDOWN = 1.5
 var dashing : bool = false
@@ -56,6 +57,9 @@ func _process(delta):
 	
 	select_animation()
 	update()
+
+func reset_health():
+	health = max_health
 
 func shoot(delta):
 	var weapon = get_weapon()

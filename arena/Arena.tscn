@@ -3,7 +3,7 @@
 [ext_resource path="res://tiles/Tiles.tres" type="TileSet" id=1]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://weapons/minigun/Minigun.tscn" type="PackedScene" id=3]
-[ext_resource path="res://player/AIPlayer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://player/AIController.gd" type="Script" id=4]
 
 [node name="Arena" type="Node2D"]
 
@@ -40,7 +40,13 @@ player_id = 1
 position = Vector2( 736, 96 )
 player_id = 2
 
-[node name="AIPlayer" parent="." instance=ExtResource( 4 )]
-modulate = Color( 1, 0.960784, 0, 1 )
-position = Vector2( 104.875, 439.024 )
+[node name="AI" parent="." instance=ExtResource( 2 )]
+position = Vector2( 74.2827, 502.182 )
+player_id = 3
+speed = 100
+skin = "usd"
+controllerPath = NodePath("../AI/AIController")
+
+[node name="AIController" type="Node2D" parent="AI"]
+script = ExtResource( 4 )
 
