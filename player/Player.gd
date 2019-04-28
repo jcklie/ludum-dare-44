@@ -116,13 +116,16 @@ func damage(damage):
 	
 	$HitParticles.emitting = true
 
-		
 	health -= damage
 	if health < 0:
 		emit_signal("player_life_lost", player_id)
 		queue_free()
 		
 func dash():
+	# Dont dash if the player is not moving
+	if velocity == Vector2():
+		return
+		
 	speed = 800
 	dashing = true
 	$DashTimer.start()
