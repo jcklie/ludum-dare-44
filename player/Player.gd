@@ -3,6 +3,8 @@ extends KinematicBody2D
 const IDLE = "idle"
 const SKIN_ANGULAR_STEPS = 16
 
+var death_animation = preload("res://player/HitParticles.tscn")
+
 export(int) var player_id
 export (int) var speed = 200
 export(String) var skin = "eur"
@@ -15,6 +17,7 @@ var weapon_idx = 0
 
 var max_health: int = 100
 onready var health = max_health
+var dead : bool = false
 
 const DASH_MAX_COOLDOWN = 1.5
 var dashing : bool = false
@@ -53,10 +56,13 @@ func _ready():
 		controller = get_node(controllerPath)
 		
 func _process(delta):
+	if dead:
+		return
+		
 	if not dashing:
 		dash_cooldown -= delta
 	
-	if controller != null:
+	if controller != null and !dead:
 		# process inputs
 		controller.process_input(delta)
 	
@@ -79,6 +85,9 @@ func reset_health():
 	health = max_health
 
 func shoot(delta):
+	if dead:
+		return
+	
 	var weapon = get_weapon()
 	if weapon:
 		weapon.shoot(delta)
@@ -89,14 +98,17 @@ func select_animation():
 	var ani_name = ani + "_" + str(ani_ang_step)
 	$AnimatedSprite.animation = ani_name
 	
-func _physics_process(delta):	
+func _physics_process(delta):
+	if dead:
+		return
+	
 	if not dashing:
 		move_and_slide(velocity)
 	else:
 		move_and_collide(velocity * delta)
 		
 func damage(damage):
-	if dashing:
+	if dashing or dead:
 		return
 	
 	$HitParticles.emitting = true
@@ -108,7 +120,8 @@ func damage(damage):
 		
 func destroy():
 	emit_signal("player_death")
-	queue_free()
+	dead = true
+	play_death_animation()
 
 func swap_weapon():
 	weapon_idx = (weapon_idx + 1) % weapons.size()
@@ -137,3 +150,22 @@ func get_weapon():
 	var weapon = weapons[weapon_idx]
 	weapon.player = self
 	return weapon
+	
+func play_death_animation():
+	var anim = death_animation.instance()
+	anim.emitting = true
+	anim.get_process_material().scale = .5
+	anim.set_one_shot(false)
+	anim.get_process_material().initial_velocity = 400
+
+	var timer = Timer.new()
+	timer.set_wait_time(1)
+	timer.connect("timeout", self, "queue_free")
+	
+	add_child(anim)
+	add_child(timer)
+	
+	timer.start()	
+	
+func kill_self():
+	queue_free()

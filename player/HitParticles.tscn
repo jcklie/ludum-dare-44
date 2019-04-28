@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://player/blood.png" type="Texture" id=1]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 1
+emission_sphere_radius = 11.3
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 275.86
+initial_velocity_random = 0.8
+angular_velocity = 99.31
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+
+[node name="HitParticles" type="Particles2D"]
+scale = Vector2( 0.5, 0.5 )
+emitting = false
+lifetime = 0.3
+one_shot = true
+randomness = 0.23
+local_coords = false
+process_material = SubResource( 1 )
+texture = ExtResource( 1 )
+

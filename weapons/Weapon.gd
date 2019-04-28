@@ -11,7 +11,7 @@ var fireDelay : float = 0
 
 func shoot(delta):
 	if fireDelay > 0:
-		fireDelay -= 1.0 * delta
+		fireDelay -= delta
 		return
 		
 	var newProjectile = Projectile.instance()

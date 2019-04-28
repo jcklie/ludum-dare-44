@@ -8,9 +8,8 @@ onready var notifier = get_node("Notifier")
 
 func _ready():
 	connect("body_entered", self, "_on_body_enter")
-	notifier.connect("screen_exited", self, "_on_screen_exited")
 	
-	set_collision_layer_bit(0, true)
+	notifier.connect("screen_exited", self, "_on_screen_exited")
 	
 func _process(delta):
 	move(delta)
@@ -24,8 +23,9 @@ func _on_body_enter(body):
 			body.damage(damage)
 			queue_free()
 	else:
+		if body.get("health"):
+			body.damage(damage)
 		queue_free()
-
 
 func _on_screen_exited():	
 	queue_free()
