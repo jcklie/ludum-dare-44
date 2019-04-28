@@ -6,13 +6,12 @@ const SKIN_ANGULAR_STEPS = 16
 export(int) var player_id
 export (int) var speed = 200
 export(String) var skin = "eur"
+export(NodePath) var controllerPath
+onready var controller = get_node(controllerPath)
 var ani = IDLE
 
 onready var weapons = $Weapons.get_children()
 var weapon_idx = 0
-
-var velocity = Vector2()
-var direction = Vector2()
 
 var health: int = 100
 
@@ -20,14 +19,8 @@ const DASH_MAX_COOLDOWN = 1.5
 var dashing : bool = false
 var dash_cooldown = 0
 
-# Key bindings
-var key_left
-var key_right
-var key_up
-var key_down
-var key_shoot
-var key_swap_weapon
-var key_special
+var velocity = Vector2()
+var direction = Vector2()
 
 # Signals
 
@@ -46,14 +39,6 @@ func _ready():
 			sf.add_frame(ani_ang_step, load(path))
 	
 	$AnimatedSprite.frames = sf
-	
-	key_left = "player_%s_left" % player_id
-	key_right = "player_%s_right" % player_id
-	key_up = "player_%s_up" % player_id
-	key_down = "player_%s_down" % player_id
-	key_shoot = "player_%s_shoot" % player_id
-	key_swap_weapon = "player_%s_switch_weapon" % player_id
-	key_special = "player_%s_special" % player_id
 		
 	set_collision_layer_bit(0, false)
 	set_collision_layer_bit(player_id, true)
@@ -63,48 +48,27 @@ func _ready():
 	$DashTimer.connect("timeout",self,"_on_DashTimer_timeout") 
 		
 func _process(delta):
-	get_input()
-	select_animation()
-	
 	if not dashing:
 		dash_cooldown -= delta
+		
+	# first process inputs
+	controller.process_input(delta)
 	
+	select_animation()
 	update()
 
-func get_input():
-	velocity = Vector2()
-	if Input.is_action_pressed(key_left):
-		velocity.x -= 1
-	if Input.is_action_pressed(key_right):
-		velocity.x += 1
-	if Input.is_action_pressed(key_up):
-		velocity.y -= 1
-	if Input.is_action_pressed(key_down):
-		velocity.y += 1
-		
-	if Input.is_action_just_pressed(key_special) && not dashing and dash_cooldown < 0:
-		dash()
-	
-	if Input.is_action_just_released(key_swap_weapon):
-		weapon_idx = (weapon_idx + 1) % weapons.size()
-		
-	velocity = velocity.normalized() * speed
-	direction = (get_pointer_position() - global_position).normalized()
-	
+func shoot(delta):
+	var weapon = get_weapon()
+	if weapon:
+		weapon.shoot(delta)
+
 func select_animation():
 	var rotation_degs = rad2deg(get_angle_to(get_global_mouse_position())) + 180
 	var ani_ang_step =  int(round(SKIN_ANGULAR_STEPS/2 + SKIN_ANGULAR_STEPS * (rotation_degs / 360.0))) % SKIN_ANGULAR_STEPS
 	var ani_name = ani + "_" + str(ani_ang_step)
 	$AnimatedSprite.animation = ani_name
-
-func get_pointer_position():
-	return get_global_mouse_position()
 	
-func _physics_process(delta):
-	var weapon = get_weapon()
-	if weapon && Input.is_action_pressed(key_shoot):
-		weapon.shoot(delta)
-	
+func _physics_process(delta):	
 	if not dashing:
 		move_and_slide(velocity)
 	else:
@@ -120,10 +84,17 @@ func damage(damage):
 	if health < 0:
 		emit_signal("player_life_lost", player_id)
 		queue_free()
-		
+
+func swap_weapon():
+	weapon_idx = (weapon_idx + 1) % weapons.size()
+
+func set_movement(direction, orientation):
+	velocity = direction * speed
+	self.direction = orientation
+
 func dash():
-	# Dont dash if the player is not moving
-	if velocity == Vector2():
+	# Dont dash if the player is not moving or currently dashing / on cooldown
+	if dashing or dash_cooldown > 0 or velocity == Vector2():
 		return
 		
 	speed = 800
