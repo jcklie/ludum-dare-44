@@ -19,9 +19,13 @@ func move(delta):
 	global_position += velocity * delta
 	
 func _on_body_enter(body):
-	if body.get("player_id") and body.player_id != player_id:
-		body.damage(damage)
+	if body.get("player_id"):
+		if body.player_id != player_id:
+			body.damage(damage)
+			queue_free()
+	else:
 		queue_free()
+
 
 func _on_screen_exited():	
 	queue_free()

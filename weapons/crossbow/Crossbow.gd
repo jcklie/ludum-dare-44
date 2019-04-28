@@ -2,6 +2,6 @@ extends "res://weapons/Weapon.gd"
 
 func _ready():
 	Projectile = preload("res://weapons/crossbow/CrossbowProjectile.tscn")
-	MaxFireDelay = 1.0
+	MaxFireDelay = .5
 	Velocity = 800
 	Damage = 35

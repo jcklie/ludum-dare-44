@@ -92,11 +92,10 @@ player_1_special={
 [layer_names]
 
 2d_physics/layer_1="Bullets"
-2d_physics/layer_2="Player 1"
-2d_physics/layer_3="Player 2"
-2d_physics/layer_4="Player 3"
-2d_physics/layer_5="Impassable Terrain"
-2d_physics/layer_6="Passable Terrain"
+2d_physics/layer_2="Water"
+2d_physics/layer_3="Player"
+2d_physics/layer_4="Impassable Terrain"
+2d_physics/layer_5="Passable Terrain"
 
 [physics]
 
