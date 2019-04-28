@@ -15,7 +15,7 @@ class ValueSource:
 	
 	func _init(currency, future_lookahead):
 		self.currency = currency
-		self.color = Global.get_color(currency)
+		self.color = Global.colors[currency]
 		self.future_lookahead = future_lookahead
 	
 	func generate_value(gametime):
@@ -69,7 +69,7 @@ func _ready():
 	var future_lookahead = ceil(0.75 * width / second_width) + 1
 	print("Lookahead: " + str(future_lookahead))
 	# Add all currencies to the chart
-	for currency in Global.get_currencies():
+	for currency in Global.currencies:
 		sources[currency] = ValueSource.new(currency, future_lookahead)
 
 func get_currency_value(currency):

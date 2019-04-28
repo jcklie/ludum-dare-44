@@ -40,7 +40,7 @@ func _ready():
 			var ani_ang_step = ani + "_" + str(ang_step)
 			sf.add_animation(ani_ang_step)
 			# we only one frame per animation right now
-			var path = path_template.format({"skin": Global.get_skin_path(currency), "ani": ani, "step": ang_step})
+			var path = path_template.format({"skin": Global.skins[currency], "ani": ani, "step": ang_step})
 			sf.add_frame(ani_ang_step, load(path))
 	
 	$AnimatedSprite.frames = sf
