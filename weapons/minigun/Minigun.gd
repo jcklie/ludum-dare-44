@@ -5,3 +5,4 @@ func _ready():
 	MaxFireDelay = .1
 	Velocity = 800
 	Damage = 10
+	MaxBullets = 5
