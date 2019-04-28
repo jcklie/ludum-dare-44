@@ -30,6 +30,7 @@ var direction = Vector2()
 
 signal player_life_lost
 signal player_death
+signal player_hurt
 
 var death_animation_duration = 1
 
@@ -56,6 +57,10 @@ func _ready():
 	
 	if controllerPath != "":
 		controller = get_node(controllerPath)
+		
+	# register sounds
+	connect("player_hurt", AudioEngine, "_on_player_hurt")
+	connect("player_death", AudioEngine, "_on_player_death")
 		
 func _process(delta):
 	if dead:
@@ -118,7 +123,8 @@ func damage(damage):
 		return
 	
 	$HitParticles.emitting = true
-
+	emit_signal("player_hurt")
+	
 	health -= damage
 	if health < 0:
 		emit_signal("player_life_lost")

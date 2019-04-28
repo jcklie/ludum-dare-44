@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Global="*res://Global.gd"
+AudioEngine="*res://audio/AudioEngine.tscn"
 
 [display]
 
