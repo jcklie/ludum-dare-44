@@ -17,7 +17,7 @@ func spawn():
 	var ai_controller = load("res://player/AIController.gd").new()
 	
 	player.add_child(ai_controller)
-	player.skin = "eur"
+	player.currency = Global.Currency.Euro
 	player.controller = ai_controller
 	player.speed = 100
 	player.player_id = 7
