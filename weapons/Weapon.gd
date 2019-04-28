@@ -23,7 +23,7 @@ func _process(delta):
 	fireDelay -= delta
 	if fireDelay <= 0 and not reloaded:
 		reloaded = true
-		emit_signal("weapon_reload", name)
+		emit_signal("weapon_reload", name, self)
 		
 func shoot(delta):
 	if fireDelay > 0 || live_bullets >= MaxBullets:
@@ -42,7 +42,7 @@ func shoot(delta):
 	fireDelay = MaxFireDelay
 	reloaded = false
 	
-	emit_signal("weapon_fired", name)
+	emit_signal("weapon_fired", name, self)
 
 func _on_bullet_died():
 	live_bullets -= 1
