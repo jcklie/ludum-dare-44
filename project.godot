@@ -19,6 +19,10 @@ config/name="ludum-dare-44"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://Global.gd"
+
 [display]
 
 window/size/height=576

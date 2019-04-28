@@ -7,15 +7,15 @@ class ValueSource:
 	
 	var values = []
 	var timestamps = []
-	var currency: String
+	var currency
 	var color: Color
 	
 	var key_timespan = 4
 	var future_lookahead
 	
-	func _init(currency, color, future_lookahead):
+	func _init(currency, future_lookahead):
 		self.currency = currency
-		self.color = color
+		self.color = Global.get_color(currency)
 		self.future_lookahead = future_lookahead
 	
 	func generate_value(gametime):
@@ -68,13 +68,13 @@ var total_elapsed = 0
 func _ready():
 	var future_lookahead = ceil(0.75 * width / second_width) + 1
 	print("Lookahead: " + str(future_lookahead))
-	sources["€"] = ValueSource.new("€", Color.green, future_lookahead)
-	sources["$"] = ValueSource.new("$", Color.yellow, future_lookahead)
-	sources["¥"] = ValueSource.new("¥", Color.blue, future_lookahead)
+	# Add all currencies to the chart
+	for currency in Global.get_currencies():
+		sources[currency] = ValueSource.new(currency, future_lookahead)
 
 func get_currency_value(currency):
 	"""
-	Get the value of the given currency (string) at the last gametime.
+	Get the value of the given currency (type Global.Currency) at the last gametime.
 	"""
 	
 	return sources[currency].get_current_value(total_elapsed)
