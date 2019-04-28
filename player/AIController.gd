@@ -59,10 +59,8 @@ func process_input(delta):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	move_to_new_goal()
-	
-	# TODO: Set the collision shape correctly such that the
-	# AI player can actually move freely..
-	player.get_node("CollisionShape2D").shape.radius = 14
+	# Update when the player died (to reset _draw)
+	player.connect("player_death", self, "update")
 
 func move_to_new_goal():
 	goal = player.get_random_valid_position()
@@ -73,4 +71,5 @@ func start_movement():
 	navigation_done = false
 
 func _draw():
-	draw_circle(global_transform.inverse() * goal, 10, Color.green)
+	if !player.dead:
+		draw_circle(global_transform.inverse() * goal, 10, Color.green)
