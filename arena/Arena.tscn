@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://tiles/Tiles.tres" type="TileSet" id=1]
 [ext_resource path="res://tiles/DestroyableTiles.gd" type="Script" id=2]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://player/AIController.gd" type="Script" id=4]
+[ext_resource path="res://player/PlayerController.gd" type="Script" id=4]
+[ext_resource path="res://player/AIManager.gd" type="Script" id=5]
 
 [node name="Arena" type="Node2D"]
 
@@ -41,18 +42,15 @@ script = ExtResource( 2 )
 position = Vector2( 192, 160 )
 collision_mask = 11
 player_id = 1
+controllerPath = NodePath("PlayerController")
+
+[node name="PlayerController" type="Node2D" parent="Player1"]
+script = ExtResource( 4 )
 
 [node name="Player2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 736, 96 )
 player_id = 2
 
-[node name="AI" parent="." instance=ExtResource( 3 )]
-position = Vector2( 74.2827, 502.182 )
-player_id = 3
-speed = 100
-skin = "usd"
-controllerPath = NodePath("../AI/AIController")
-
-[node name="AIController" type="Node2D" parent="AI"]
-script = ExtResource( 4 )
+[node name="AIManager" type="Node2D" parent="."]
+script = ExtResource( 5 )
 

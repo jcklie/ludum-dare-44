@@ -1,12 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
-[ext_resource path="res://player/PlayerController.gd" type="Script" id=2]
-[ext_resource path="res://player/HealthBar.gd" type="Script" id=3]
-[ext_resource path="res://weapons/minigun/Minigun.tscn" type="PackedScene" id=4]
-[ext_resource path="res://weapons/crossbow/Crossbow.tscn" type="PackedScene" id=5]
-[ext_resource path="res://player/dash_cloud.png" type="Texture" id=6]
-[ext_resource path="res://player/HitParticles.tscn" type="PackedScene" id=7]
+[ext_resource path="res://player/HealthBar.gd" type="Script" id=2]
+[ext_resource path="res://weapons/minigun/Minigun.tscn" type="PackedScene" id=3]
+[ext_resource path="res://weapons/crossbow/Crossbow.tscn" type="PackedScene" id=4]
+[ext_resource path="res://player/dash_cloud.png" type="Texture" id=5]
+[ext_resource path="res://player/HitParticles.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 14.0
@@ -29,10 +28,6 @@ collision_layer = 4
 collision_mask = 15
 script = ExtResource( 1 )
 skin = "yen"
-controllerPath = NodePath("PlayerController")
-
-[node name="PlayerController" type="Node2D" parent="."]
-script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -42,13 +37,13 @@ scale = Vector2( 0.2, 0.2 )
 
 [node name="HealthBar" type="Node2D" parent="."]
 z_index = 1
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 
 [node name="Weapons" type="Node2D" parent="."]
 
-[node name="Minigun" parent="Weapons" instance=ExtResource( 4 )]
+[node name="Minigun" parent="Weapons" instance=ExtResource( 3 )]
 
-[node name="Crossbow" parent="Weapons" instance=ExtResource( 5 )]
+[node name="Crossbow" parent="Weapons" instance=ExtResource( 4 )]
 
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.2
@@ -62,7 +57,7 @@ speed_scale = 5.0
 randomness = 1.0
 local_coords = false
 process_material = SubResource( 2 )
-texture = ExtResource( 6 )
+texture = ExtResource( 5 )
 
-[node name="HitParticles" parent="." instance=ExtResource( 7 )]
+[node name="HitParticles" parent="." instance=ExtResource( 6 )]
 

@@ -9,7 +9,7 @@ export(int) var player_id
 export (int) var speed = 200
 export(String) var skin = "eur"
 export(NodePath) var controllerPath
-onready var controller = get_node(controllerPath)
+var controller
 var ani = IDLE
 
 onready var weapons = $Weapons.get_children()
@@ -29,6 +29,7 @@ var direction = Vector2()
 # Signals
 
 signal player_life_lost
+signal player_death
 
 func _ready():
 	# load all animation sprite frames
@@ -49,7 +50,10 @@ func _ready():
 	
 	collision_mask = 0xFF
 	
-	$DashTimer.connect("timeout",self,"_on_DashTimer_timeout") 
+	$DashTimer.connect("timeout",self,"_on_DashTimer_timeout")
+	
+	if controllerPath != "":
+		controller = get_node(controllerPath)
 		
 func _process(delta):
 	if dead:
@@ -57,17 +61,33 @@ func _process(delta):
 		
 	if not dashing:
 		dash_cooldown -= delta
-		
-	# first process inputs
-	controller.process_input(delta)
+	
+	if controller != null and !dead:
+		# process inputs
+		controller.process_input(delta)
 	
 	select_animation()
 	update()
+
+func get_random_valid_position():
+	var size = get_viewport().size
+	var freePosition
+	var collision = true
+	
+	while collision:
+		# just generate some random position and check whether we can actually be there
+		freePosition = Vector2(randi() % int(size.x), randi() % int(size.y))
+		collision = test_move(Transform2D(0, freePosition), Vector2(0.1, 0.1))
+	
+	return freePosition
 
 func reset_health():
 	health = max_health
 
 func shoot(delta):
+	if dead:
+		return
+	
 	var weapon = get_weapon()
 	if weapon:
 		weapon.shoot(delta)
@@ -78,23 +98,30 @@ func select_animation():
 	var ani_name = ani + "_" + str(ani_ang_step)
 	$AnimatedSprite.animation = ani_name
 	
-func _physics_process(delta):	
+func _physics_process(delta):
+	if dead:
+		return
+	
 	if not dashing:
 		move_and_slide(velocity)
 	else:
 		move_and_collide(velocity * delta)
 		
 func damage(damage):
-	if dashing:
+	if dashing or dead:
 		return
 	
 	$HitParticles.emitting = true
 
 	health -= damage
 	if health < 0:
-		emit_signal("player_life_lost", player_id)
-		dead = true
-		play_death_animation()	
+		emit_signal("player_life_lost")
+		destroy()
+		
+func destroy():
+	emit_signal("player_death")
+	dead = true
+	play_death_animation()
 
 func swap_weapon():
 	weapon_idx = (weapon_idx + 1) % weapons.size()
