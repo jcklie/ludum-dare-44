@@ -30,7 +30,7 @@ var direction = Vector2()
 
 signal player_life_lost
 signal player_death
-signal player_hurt
+signal player_hurt(source)
 
 var death_animation_duration = 1
 
@@ -53,7 +53,7 @@ func _ready():
 	
 	collision_mask = 0xFF
 	
-	$DashTimer.connect("timeout",self,"_on_DashTimer_timeout")
+	$DashTimer.connect("timeout", self, "_on_DashTimer_timeout")
 	
 	if controllerPath != "":
 		controller = get_node(controllerPath)
@@ -61,7 +61,7 @@ func _ready():
 	# register sounds
 	connect("player_hurt", AudioEngine, "_on_player_hurt")
 	connect("player_death", AudioEngine, "_on_player_death")
-		
+
 func _process(delta):
 	if dead:
 		# make the player smaller (assumes scale.x = scale.y)
@@ -123,7 +123,7 @@ func damage(damage):
 		return
 	
 	$HitParticles.emitting = true
-	emit_signal("player_hurt")
+	emit_signal("player_hurt", self)
 	
 	health -= damage
 	if health < 0:

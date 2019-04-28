@@ -8,6 +8,7 @@ class ValueSource:
 	var values = []
 	var timestamps = []
 	var currency
+	var symbol
 	var color: Color
 	
 	var key_timespan = 4
@@ -16,6 +17,7 @@ class ValueSource:
 	func _init(currency, future_lookahead):
 		self.currency = currency
 		self.color = Global.colors[currency]
+		self.symbol = Global.symbols[currency]
 		self.future_lookahead = future_lookahead
 	
 	func generate_value(gametime):
@@ -64,10 +66,11 @@ var sources = {}
 # saves the total elapsed game time
 var total_elapsed = 0
 
+onready var legend = get_node("../Legend")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var future_lookahead = ceil(0.75 * width / second_width) + 1
-	print("Lookahead: " + str(future_lookahead))
 	# Add all currencies to the chart
 	for currency in Global.currencies:
 		sources[currency] = ValueSource.new(currency, future_lookahead)
@@ -79,12 +82,32 @@ func get_currency_value(currency):
 	
 	return sources[currency].get_current_value(total_elapsed)
 
+func generate_legend():
+	legend.clear()
+	legend.push_align(RichTextLabel.ALIGN_CENTER)
+	
+	var i = 0
+	var size = sources.size()
+	for currency in sources:
+		var valueSource = sources[currency]
+
+		legend.push_color(valueSource.color)
+		legend.add_text(valueSource.symbol)
+		
+		i += 1
+		if i < size:
+			legend.add_text("  ")
+	
+
 func _process(delta):
 	total_elapsed += delta
 	
 	# generate new currency values (if needed)
 	for sourceKey in sources:
 		sources[sourceKey].process(total_elapsed)
+	
+	# update the legend
+	generate_legend()
 	
 	# update the gui (draw the lines)
 	update()

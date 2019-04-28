@@ -12,8 +12,8 @@ var fireDelay : float = 0
 var reloaded : bool = true
 var live_bullets : int = 0
 
-signal weapon_fired(name)
-signal weapon_reload(name)
+signal weapon_fired(name, source)
+signal weapon_reload(name, source)
 
 func _ready():
 	connect("weapon_fired", AudioEngine, "_on_weapon_fired")
