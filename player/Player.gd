@@ -30,6 +30,9 @@ var direction = Vector2()
 
 signal player_life_lost
 signal player_death
+signal player_hurt
+
+var death_animation_duration = 1
 
 func _ready():
 	# load all animation sprite frames
@@ -55,8 +58,16 @@ func _ready():
 	if controllerPath != "":
 		controller = get_node(controllerPath)
 		
+	# register sounds
+	connect("player_hurt", AudioEngine, "_on_player_hurt")
+	connect("player_death", AudioEngine, "_on_player_death")
+		
 func _process(delta):
 	if dead:
+		# make the player smaller (assumes scale.x = scale.y)
+		var new_scale_x = max(0.0, scale.x - delta / death_animation_duration)
+		scale.x = new_scale_x
+		scale.y = new_scale_x
 		return
 		
 	if not dashing:
@@ -112,7 +123,8 @@ func damage(damage):
 		return
 	
 	$HitParticles.emitting = true
-
+	emit_signal("player_hurt")
+	
 	health -= damage
 	if health < 0:
 		emit_signal("player_life_lost")
@@ -121,6 +133,7 @@ func damage(damage):
 func destroy():
 	emit_signal("player_death")
 	dead = true
+	$HealthBar.queue_free()
 	play_death_animation()
 
 func swap_weapon():
@@ -150,7 +163,7 @@ func get_weapon():
 	var weapon = weapons[weapon_idx]
 	weapon.player = self
 	return weapon
-	
+
 func play_death_animation():
 	var anim = death_animation.instance()
 	anim.emitting = true
@@ -159,7 +172,7 @@ func play_death_animation():
 	anim.get_process_material().initial_velocity = 400
 
 	var timer = Timer.new()
-	timer.set_wait_time(1)
+	timer.set_wait_time(death_animation_duration)
 	timer.connect("timeout", self, "queue_free")
 	
 	add_child(anim)

@@ -1,0 +1,35 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://audio/AudioEngine.gd" type="Script" id=1]
+[ext_resource path="res://audio/sfx/minigin.wav" type="AudioStream" id=2]
+[ext_resource path="res://audio/sfx/crossbow.wav" type="AudioStream" id=3]
+[ext_resource path="res://audio/sfx/hit.wav" type="AudioStream" id=4]
+[ext_resource path="res://audio/sfx/laser.wav" type="AudioStream" id=5]
+[ext_resource path="res://audio/sfx/death.wav" type="AudioStream" id=6]
+[ext_resource path="res://audio/sfx/cash_register_freesound.wav" type="AudioStream" id=7]
+[ext_resource path="res://audio/sfx/win.wav" type="AudioStream" id=8]
+
+[node name="AudioEngine" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="minigun_fired" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )
+
+[node name="crossbow_reload" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+
+[node name="player_hurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
+[node name="laser_fired" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+
+[node name="player_death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="cash_register" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+
+[node name="player_wins" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+
