@@ -3,6 +3,8 @@ extends KinematicBody2D
 const IDLE = "idle"
 const SKIN_ANGULAR_STEPS = 16
 
+var death_animation = preload("res://player/HitParticles.tscn")
+
 export(int) var player_id
 export (int) var speed = 200
 export(String) var skin = "eur"
@@ -14,6 +16,7 @@ onready var weapons = $Weapons.get_children()
 var weapon_idx = 0
 
 var health: int = 100
+var dead : bool = false
 
 const DASH_MAX_COOLDOWN = 1.5
 var dashing : bool = false
@@ -48,6 +51,9 @@ func _ready():
 	$DashTimer.connect("timeout",self,"_on_DashTimer_timeout") 
 		
 func _process(delta):
+	if dead:
+		return
+		
 	if not dashing:
 		dash_cooldown -= delta
 		
@@ -83,7 +89,8 @@ func damage(damage):
 	health -= damage
 	if health < 0:
 		emit_signal("player_life_lost", player_id)
-		queue_free()
+		dead = true
+		play_death_animation()	
 
 func swap_weapon():
 	weapon_idx = (weapon_idx + 1) % weapons.size()
@@ -112,3 +119,22 @@ func get_weapon():
 	var weapon = weapons[weapon_idx]
 	weapon.player = self
 	return weapon
+	
+func play_death_animation():
+	var anim = death_animation.instance()
+	anim.emitting = true
+	anim.get_process_material().scale = .5
+	anim.set_one_shot(false)
+	anim.get_process_material().initial_velocity = 400
+
+	var timer = Timer.new()
+	timer.set_wait_time(1)
+	timer.connect("timeout", self, "queue_free")
+	
+	add_child(anim)
+	add_child(timer)
+	
+	timer.start()	
+	
+func kill_self():
+	queue_free()
