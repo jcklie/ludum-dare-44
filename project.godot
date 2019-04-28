@@ -109,22 +109,22 @@ player_2_shoot={
  ]
 }
 player_2_rleft={
-"deadzone": 0.5,
+"deadzone": 0.0,
 "events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":2,"axis_value":-1.0,"script":null)
  ]
 }
 player_2_rright={
-"deadzone": 0.5,
+"deadzone": 0.0,
 "events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":2,"axis_value":1.0,"script":null)
  ]
 }
 player_2_rup={
-"deadzone": 0.5,
+"deadzone": 0.0,
 "events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":3,"axis_value":-1.0,"script":null)
  ]
 }
 player_2_rdown={
-"deadzone": 0.5,
+"deadzone": 0.0,
 "events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":3,"axis_value":1.0,"script":null)
  ]
 }

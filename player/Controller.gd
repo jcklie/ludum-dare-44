@@ -71,9 +71,9 @@ func get_facing_direction():
 	else:
 		var horizontal = Input.get_action_strength(key_rright) - Input.get_action_strength(key_rleft)
 		var vertical = Input.get_action_strength(key_rdown) - Input.get_action_strength(key_rup)
-		var result = Vector2(horizontal, vertical)
+		var result = Vector2(horizontal, vertical).normalized()
 		
-		if result.length() < 0.05:
+		if result.length() < 0.01:
 			return last_direction
 		else:
 			last_direction = result
