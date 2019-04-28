@@ -14,6 +14,7 @@ radius = 14.0
 flag_disable_z = true
 spread = 84.31
 gravity = Vector3( 0, 0, 0 )
+angular_velocity = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = 4.6
