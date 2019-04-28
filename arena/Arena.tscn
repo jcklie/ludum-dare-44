@@ -3,13 +3,13 @@
 [ext_resource path="res://tiles/Tiles.tres" type="TileSet" id=1]
 [ext_resource path="res://tiles/DestroyableTiles.gd" type="Script" id=2]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://player/AIPlayer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://player/AIController.gd" type="Script" id=4]
 
 [node name="Arena" type="Node2D"]
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
 
-[node name="Immutable Objects" type="TileMap" parent="Navigation2D"]
+[node name="Immutable TileMap" type="TileMap" parent="Navigation2D"]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 8
@@ -21,7 +21,6 @@ __meta__ = {
 }
 
 [node name="Water" type="TileMap" parent="Navigation2D"]
-z_index = -1
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 2
@@ -29,8 +28,7 @@ collision_mask = 4
 format = 1
 tile_data = PoolIntArray( 65547, 12, 0, 65548, 12, 0, 65549, 12, 0, 65550, 12, 0, 65551, 12, 0, 131083, 12, 0, 131084, 12, 0, 131085, 12, 0, 131086, 12, 0, 131087, 12, 0, 196619, 12, 0, 196620, 12, 0, 196621, 12, 0, 196622, 12, 0, 196623, 12, 0, 262155, 12, 0, 262156, 12, 0, 262157, 12, 0, 262158, 12, 0, 262159, 12, 0, 327691, 12, 0, 327692, 12, 0, 327693, 12, 0, 327694, 12, 0, 327695, 12, 0, 524299, 12, 0, 524300, 12, 0, 524301, 12, 0, 524302, 12, 0, 524303, 12, 0, 589835, 12, 0, 589836, 12, 0, 589837, 12, 0, 589838, 12, 0, 589839, 12, 0, 655371, 12, 0, 655372, 12, 0, 655373, 12, 0, 655374, 12, 0, 655375, 12, 0 )
 
-[node name="Destroyable" type="TileMap" parent="Navigation2D"]
-z_index = 1
+[node name="Destructibles" type="TileMap" parent="Navigation2D"]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 8
@@ -48,7 +46,13 @@ player_id = 1
 position = Vector2( 736, 96 )
 player_id = 2
 
-[node name="AIPlayer" parent="." instance=ExtResource( 4 )]
-modulate = Color( 1, 0.960784, 0, 1 )
-position = Vector2( 104.875, 439.024 )
+[node name="AI" parent="." instance=ExtResource( 3 )]
+position = Vector2( 74.2827, 502.182 )
+player_id = 3
+speed = 100
+skin = "usd"
+controllerPath = NodePath("../AI/AIController")
+
+[node name="AIController" type="Node2D" parent="AI"]
+script = ExtResource( 4 )
 

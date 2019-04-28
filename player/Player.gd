@@ -15,7 +15,8 @@ var ani = IDLE
 onready var weapons = $Weapons.get_children()
 var weapon_idx = 0
 
-var health: int = 100
+var max_health: int = 100
+onready var health = max_health
 var dead : bool = false
 
 const DASH_MAX_COOLDOWN = 1.5
@@ -63,13 +64,16 @@ func _process(delta):
 	select_animation()
 	update()
 
+func reset_health():
+	health = max_health
+
 func shoot(delta):
 	var weapon = get_weapon()
 	if weapon:
 		weapon.shoot(delta)
 
 func select_animation():
-	var rotation_degs = rad2deg(get_angle_to(get_global_mouse_position())) + 180
+	var rotation_degs = rad2deg(get_angle_to(position + direction)) + 180
 	var ani_ang_step =  int(round(SKIN_ANGULAR_STEPS/2 + SKIN_ANGULAR_STEPS * (rotation_degs / 360.0))) % SKIN_ANGULAR_STEPS
 	var ani_name = ani + "_" + str(ani_ang_step)
 	$AnimatedSprite.animation = ani_name
@@ -95,9 +99,9 @@ func damage(damage):
 func swap_weapon():
 	weapon_idx = (weapon_idx + 1) % weapons.size()
 
-func set_movement(direction, orientation):
-	velocity = direction * speed
-	self.direction = orientation
+func set_movement(movementDirection, facingDirection):
+	self.velocity = movementDirection * speed
+	self.direction = facingDirection
 
 func dash():
 	# Dont dash if the player is not moving or currently dashing / on cooldown

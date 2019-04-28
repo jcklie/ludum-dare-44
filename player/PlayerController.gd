@@ -36,20 +36,20 @@ func process_input(delta):
 		player.shoot(delta)
 	
 	# Movement
-	var velocity = Vector2()
+	var movement = Vector2()
 	if Input.is_action_pressed(key_left):
-		velocity.x -= 1
+		movement.x -= 1
 	if Input.is_action_pressed(key_right):
-		velocity.x += 1
+		movement.x += 1
 	if Input.is_action_pressed(key_up):
-		velocity.y -= 1
+		movement.y -= 1
 	if Input.is_action_pressed(key_down):
-		velocity.y += 1
+		movement.y += 1
 	
-	velocity = velocity.normalized()
-	var direction = (get_pointer_position() - global_position).normalized()
+	movement = movement.normalized()
+	var facingDirection = (get_pointer_position() - global_position).normalized()
 	
-	player.set_movement(velocity, direction)
+	player.set_movement(movement, facingDirection)
 	
 func get_pointer_position():
 	return get_global_mouse_position()
