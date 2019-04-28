@@ -21,7 +21,6 @@ func shoot(delta):
 		fireDelay -= delta
 		
 		if fireDelay <= 0:
-			print("blub")
 			emit_signal("weapon_reload", name)
 		return
 		
