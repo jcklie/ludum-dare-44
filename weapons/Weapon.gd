@@ -9,8 +9,8 @@ var Damage : int
 
 var fireDelay : float = 0
 
-signal weapon_fired(name)
-signal weapon_reload(name)
+signal weapon_fired(name, source)
+signal weapon_reload(name, source)
 
 func _ready():
 	connect("weapon_fired", AudioEngine, "_on_weapon_fired")
@@ -21,7 +21,7 @@ func shoot(delta):
 		fireDelay -= delta
 		
 		if fireDelay <= 0:
-			emit_signal("weapon_reload", name)
+			emit_signal("weapon_reload", name, self)
 		return
 		
 	var newProjectile = Projectile.instance()
@@ -34,7 +34,7 @@ func shoot(delta):
 	get_tree().get_root().add_child(newProjectile)
 	fireDelay = MaxFireDelay
 	
-	emit_signal("weapon_fired", name)		
+	emit_signal("weapon_fired", name, self)		
 	
 
 
