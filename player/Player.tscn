@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
-[ext_resource path="res://player/PlayerInput.gd" type="Script" id=2]
+[ext_resource path="res://player/PlayerController.gd" type="Script" id=2]
 [ext_resource path="res://player/HealthBar.gd" type="Script" id=3]
 [ext_resource path="res://weapons/crossbow/Crossbow.tscn" type="PackedScene" id=4]
 [ext_resource path="res://weapons/minigun/Minigun.tscn" type="PackedScene" id=5]
@@ -41,9 +41,9 @@ collision_layer = 4
 collision_mask = 15
 script = ExtResource( 1 )
 skin = "yen"
-controllerPath = NodePath("PlayerInput")
+controllerPath = NodePath("PlayerController")
 
-[node name="PlayerInput" type="Node2D" parent="."]
+[node name="PlayerController" type="Node2D" parent="."]
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
