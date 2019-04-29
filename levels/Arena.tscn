@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://tiles/Tiles.tres" type="TileSet" id=1]
 [ext_resource path="res://tiles/DestroyableTiles.gd" type="Script" id=2]
-[ext_resource path="res://cash_exchange/CashExchangeSpawner.gd" type="Script" id=3]
+[ext_resource path="res://cash_exchange/CashExchangeTileset.tres" type="TileSet" id=3]
+[ext_resource path="res://cash_exchange/CashExchangeSpawner.gd" type="Script" id=4]
 
 [node name="Arena" type="Node2D"]
 
@@ -26,13 +27,13 @@ script = ExtResource( 2 )
 
 [node name="CashExchangeShops" type="TileMap" parent="."]
 z_index = 1
-tile_set = ExtResource( 1 )
+tile_set = ExtResource( 3 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 16
 collision_mask = 5
 format = 1
-tile_data = PoolIntArray( 851970, 13, 0 )
-script = ExtResource( 3 )
+tile_data = PoolIntArray( 65537, 3, 0, 458753, 1, 0, 720897, 0, 0, 1048577, 2, 0 )
+script = ExtResource( 4 )
 
 [node name="Background" type="TileMap" parent="."]
 position = Vector2( -2, -1 )

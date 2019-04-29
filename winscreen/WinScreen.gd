@@ -15,3 +15,5 @@ func _ready():
 func _process(delta):
 	if Input.is_action_pressed("key_continue"):
 		GameManager.start_random_level()
+	elif Input.is_action_pressed("key_esc"):
+		GameManager.show_menu()

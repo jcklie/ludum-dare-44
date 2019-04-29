@@ -36,7 +36,7 @@ var target = Vector2(0, 0)
 # Signals
 
 signal player_life_lost
-signal player_death
+signal player_death(player_id)
 signal player_hurt(source)
 
 var death_animation_duration = 1
@@ -178,7 +178,7 @@ func destroy():
 	if dead:
 		return
 		
-	emit_signal("player_death")
+	emit_signal("player_death", player_id)
 	play_death_animation()
 	
 	dead = true
