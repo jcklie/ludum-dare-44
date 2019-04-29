@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://winscreen/WinScreen.gd" type="Script" id=1]
 [ext_resource path="res://winscreen/background.png" type="Texture" id=2]
@@ -13,6 +13,10 @@ font_data = ExtResource( 4 )
 [sub_resource type="DynamicFont" id=2]
 size = 50
 outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
 font_data = ExtResource( 4 )
 
 [node name="WinScreen" type="Control"]
@@ -51,4 +55,13 @@ custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Press \"Enter\" 
 To Continue..."
+
+[node name="Back Label" type="Label" parent="."]
+margin_left = 544.0
+margin_top = 416.0
+margin_right = 863.0
+margin_bottom = 434.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Press \"ESC\" to go back to Menu"
 

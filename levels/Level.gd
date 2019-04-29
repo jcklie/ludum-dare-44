@@ -24,4 +24,6 @@ func _ready():
 		GameManager.players[id] = player
 		player.connect("player_death", GameManager, "_on_player_death")
 		
+		GameManager.life_players.append(id)
+		
 		player.init()

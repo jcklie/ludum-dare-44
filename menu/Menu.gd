@@ -1,6 +1,7 @@
 extends Container
 
 func _ready():
+	OS.set_window_maximized(true)
 	$StartButton.connect("pressed", self, "_start_game")
 	$ExitButton.connect("pressed", self, "_exit_game")
 	
