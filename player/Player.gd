@@ -212,4 +212,4 @@ func _draw():
 	show_target_raycast = get_weapon().HasLaser
 	if !dead and show_target_raycast:
 		draw_circle(global_transform.inverse() * target, 5, Global.colors[currency])
-		draw_line(global_transform.inverse() * global_position, global_transform.inverse() * target, Global.colors[currency], 1)
+		draw_line(global_transform.inverse() * global_position, global_transform.inverse() * target, Global.colors[currency], 1, true)
