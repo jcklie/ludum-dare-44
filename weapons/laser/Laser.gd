@@ -4,5 +4,5 @@ func _ready():
 	Projectile = preload("res://weapons/laser/LaserProjectile.tscn")
 	MaxFireDelay = .5
 	Velocity = 800
-	Damage = 10
+	Damage = 5
 	MaxBullets = 2
