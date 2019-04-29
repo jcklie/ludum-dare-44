@@ -32,5 +32,5 @@ func _on_player_death(source: Node2D = null):
 	play("player_death")
 	
 func _on_game_over():
-	print("Game over")
+	$player_death.playing = false
 	play("player_wins")
