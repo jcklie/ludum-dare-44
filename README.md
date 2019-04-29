@@ -6,19 +6,18 @@ Created for Ludum Dare 44 ("Your life is currency").
 
 *Cash Clash* is a local multiplayer top-down arena shooter game where you directly take control over a currency.
 
-<div style="text-align:center">
-<img src="docs/anim-usd.gif"/>
-<img src="docs/anim-eur.gif"/>
-<img src="docs/anim-gbp.gif"/>
-<img src="docs/anim-yen.gif"/>
-</div>
+<p align="center">
+<img src="docs/currency_anim.gif"/>
+</p>
 
 
 Your goal is to fight other currencies while keeping an eye on the current currency strength, an important component of the game.
 
-<div style="text-align:center"><img src="docs/currency_strength.png"/></div>
+<p align="center">
+<img src="docs/currency_strength.png"/>
+</p>
 
-The strength of a currency constantly varies between the values 0 and 100, impacting the strength of your currency in the arena.
+The strength of a currency constantly varies between the values 0 and 100, impacting the strength of your player character in the arena.
 
 ### Game Mechanics
 
