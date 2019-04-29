@@ -12,7 +12,8 @@ func play(sfx, source: Node2D = null):
 
 func _on_weapon_fired(name, source: Node2D = null):
 	var name_to_sound = {
-		"Minigun": "minigun_fired"}
+		"Minigun": "minigun_fired",
+		"Laser": "laser_fired"}
 	if not name in name_to_sound:
 		return
 	play(name_to_sound[name], source)
