@@ -2,43 +2,64 @@ import os
 
 import delegator
 
-characters = {"eur": ("€", "[0, 0, 1.0]"),
-              "usd": ("$", "[0, 1.0, 0]"),
-              "gbp": ("£", "[1.0, 0.65, 0]"),
-              "yen": ("¥", "[0.63, 0.14, 0.94]")}
+def run_openscad_render(openscad_options, scad_filename, output_filename):
+    command_parts = ["openscad",
+                     f"-o {output_filename}",
+                     *openscad_options,
+                     scad_filename]
+    openscad_command = " ".join(command_parts)
+    delegator.run(openscad_command)
 
-scad_filename = os.path.abspath("character.scad")
-camera_rot_x_steps = 16
-camera_rot_x = 55
-camera_trans_z = 5
-camera_dist = 36
-image_size = 256
-output_folder = os.path.abspath(os.path.join("..", "..", "player", "skin"))
+    # next up, we remove the light yellow background from OpenSCAD with transparency
+    transparency_command = f"convert {output_filename} -transparent '#ffffe5' {output_filename}"
+    delegator.run(transparency_command)
 
-for name, (char, color) in characters.items():
-    skin_anim_path = os.path.join(output_folder, name, "idle")
-    os.makedirs(skin_anim_path, exist_ok=True)
+def render_characters():
+    characters = {"eur": ("€", "[0.269, 0.347, 0.953]"),
+                  "usd": ("$", "[0, 1.0, 0]"),
+                  "gbp": ("£", "[1.0, 0.65, 0]"),
+                  "yen": ("¥", "[0.63, 0.14, 0.94]")}
 
-    for ang_step in range(camera_rot_x_steps):
-        output_filename = os.path.join(skin_anim_path, f"{ang_step}.png")
+    scad_filename = os.path.abspath("character.scad")
+    camera_rot_x_steps = 16
+    camera_rot_x = 55
+    camera_trans_z = 5
+    camera_dist = 36
+    image_size = 256
+    output_folder = os.path.abspath(os.path.join("..", "..", "player", "skin"))
 
-        parameters = {"char": '\"' + char + '\"',
-                      "char_color": color,
-                      "$fn": 100}
+    for name, (char, color) in characters.items():
+        skin_anim_path = os.path.join(output_folder, name, "idle")
+        os.makedirs(skin_anim_path, exist_ok=True)
 
-        parameter_string = "\'" + ";".join([k + "=" + str(v) for k,v in parameters.items()]) + "\'"
+        for ang_step in range(camera_rot_x_steps):
+            output_filename = os.path.join(skin_anim_path, f"{ang_step}.png")
 
-        command_parts = ["openscad",
-                         f"-o {output_filename}",
-                         f"-D {parameter_string}",
-                         f"--camera=0,0,{camera_trans_z},{camera_rot_x},0,{(ang_step/camera_rot_x_steps) * 360},{camera_dist}",
-                         f"--imgsize={image_size},{image_size}",
-                         "--projection=p",
-                         "--autocenter",
-                         scad_filename]
-        render_command = " ".join(command_parts)
-        c = delegator.run(render_command)
+            parameters = {"char": '\"' + char + '\"',
+                          "char_color": color,
+                          "$fn": 100}
 
-        # next up, we remove the light yellow background from OpenSCAD with transparency
-        transparency_command = f"convert {output_filename} -transparent '#ffffe5' {output_filename}"
-        c = delegator.run(transparency_command)
+            parameter_string = "\'" + ";".join([k + "=" + str(v) for k,v in parameters.items()]) + "\'"
+
+            openscad_options = [f"-D {parameter_string}",
+                             f"--camera=0,0,{camera_trans_z},{camera_rot_x},0,{(ang_step/camera_rot_x_steps) * 360},{camera_dist}",
+                             f"--imgsize={image_size},{image_size}",
+                             "--projection=p",
+                             "--autocenter"]
+
+            run_openscad_render(openscad_options, scad_filename, output_filename)
+
+def render_splash_screen():
+    scad_filename = os.path.abspath("splash_screen.scad")
+    image_width = 2560
+    image_height = 1440
+
+    openscad_options = ["--camera=1.28,4.64,4.39,92.1,0,209.3,60.27",
+                        f"--imgsize={image_width},{image_height}",
+                        "--autocenter"]
+    output_filename = os.path.abspath("splash.png")
+
+    run_openscad_render(openscad_options, scad_filename, output_filename)
+
+render_splash_screen()
+render_characters()
