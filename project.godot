@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="ludum-dare-44"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://menu/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -147,4 +147,5 @@ player_2_rdown={
 
 [rendering]
 
+environment/default_clear_color=Color( 0.333333, 0.866667, 1, 1 )
 environment/default_environment="res://default_env.tres"

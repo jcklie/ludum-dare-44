@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 # TODO ideas:
 # - add random offset to timings (RandomNumberGenerator)
@@ -14,14 +14,15 @@ var CashExchangeValues = {
 signal cash_exchange_state_changed(old_state, new_state)
 
 # local constants
-const SECONDS_FOR_EXCHANGING = 1
+const SECONDS_FOR_EXCHANGING = 2
 const COOLDOWN_UNTIL_OPEN = 5
-const COOLDOWN_UNTIL_FIRST_OPEN = 2 # TODO 10
+const COOLDOWN_UNTIL_FIRST_OPEN = 10
 
 # game state
 var currency = Global.Currency.Dollar
 var state
 var player_id_in_exchange = null
+var player_velocity_on_entry = null
 
 # UI-related stuff
 const ANIMATION_STEPS_PER_STATE = 1
@@ -43,7 +44,7 @@ func _init():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	connect("body_entered", self, "_on_body_enter")
+	$Area2D.connect("body_entered", self, "_on_body_enter")
 	$Timer.connect("timeout", self, "_on_timing_event")
 	
 	# attach frames
@@ -63,9 +64,20 @@ func _on_body_enter(body):
 
 func _on_timing_event():
 	if state == CashExchangeState.Exchanging:
-		_end_exchange()
+		_close_shop()
 	elif state == CashExchangeState.Closed:
-		_open_shop()
+		# if there is still a player of this shop's currency alive, the shop must remain closed (no duplicate currencies allowed)
+		var shop_allowed_to_open = true
+		for player_obj in GameManager.players.values():
+			if player_obj.currency == currency and not player_obj.dead:
+				shop_allowed_to_open = false
+		
+		if shop_allowed_to_open:
+			_open_shop()
+		else:
+			# try again some time
+			$Timer.start(COOLDOWN_UNTIL_OPEN)
+		
 
 func _change_state(new_state):
 	emit_signal("cash_exchange_state_changed", state, new_state)
@@ -73,23 +85,43 @@ func _change_state(new_state):
 	state = new_state
 	
 func _start_exchange(player_id):
+	var player_obj = GameManager.players[player_id]
+	
 	player_id_in_exchange = player_id	
+	player_velocity_on_entry = player_obj.velocity	
 	
 	# TODO put player to center of shop
 	# TODO make player immobile
 	# TODO disable player collision
 	# TODO make player invincible
 	
+	# while exchanging, the shop is solid on the outside and the trigger on the inside is disabled
+	$Area2D/InsideShopCollider.disabled = true
+	$StaticBody2D/OutsideShopCollider.disabled = false
 	_change_state(CashExchangeState.Exchanging)
 	$Timer.start(SECONDS_FOR_EXCHANGING)
 
-func _end_exchange():	
-	# TODO change player currency - use signals?
-	# TODO dash player to direction he came from
-	player_id_in_exchange = null
+func _close_shop():	
+	var player_obj = GameManager.players[player_id_in_exchange]
+	player_obj.update_currency(currency)
+	
+	# when kicking out the player, the outer collider must be temporarily disabled
+	$StaticBody2D/OutsideShopCollider.disabled = true
+	player_obj.velocity = player_velocity_on_entry * -1
+	player_obj.dash()
+	
+	# while closed, the shop should be solid on the outside
+	$StaticBody2D/OutsideShopCollider.disabled = false
 	
 	_change_state(CashExchangeState.Closed)
 	$Timer.start(COOLDOWN_UNTIL_OPEN)
+	
+	# reset
+	player_id_in_exchange = null
+	player_velocity_on_entry = null
 
 func _open_shop():
+	# once open, the outside of the shop is not solid, but the trigger on the inside is enabled
+	$Area2D/InsideShopCollider.disabled = false
+	$StaticBody2D/OutsideShopCollider.disabled = true
 	_change_state(CashExchangeState.Open)
