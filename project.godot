@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="ludum-dare-44"
+config/name="Cash Clash"
 run/main_scene="res://menu/MainMenu.tscn"
 config/icon="res://icon.png"
 
