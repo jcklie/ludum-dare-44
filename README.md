@@ -1,10 +1,8 @@
 # Ludum Dare 44: Cash Clash
 
-<p align="center" style="background-color:cornflowerblue">
 <img src="menu/splash_screen.png"/>
-</p>
 
-Created for Ludum Dare 44 ("Your life is currency").
+A game created for Ludum Dare 44 under the theme "Your life is currency".
 
 ## Concept
 
@@ -15,13 +13,13 @@ Created for Ludum Dare 44 ("Your life is currency").
 </p>
 
 
-Your goal is to fight other currencies while keeping an eye on the current currency strength, an important component of the game.
+Your goal is to fight other currencies while keeping an eye on the current currency strength, an important component of the game. This strength is visualized in a line chart as follows.
 
 <p align="center">
 <img src="docs/currency_strength.png"/>
 </p>
 
-The strength of a currency constantly varies between the values 0 and 100, impacting the strength of your player character in the arena.
+The strength of a currency constantly varies between the values 0 and 100 and directly impacts the prowess of your player character in the arena.
 
 ### Game Mechanics
 
@@ -33,7 +31,7 @@ It is also possible to change your currency. This is possible in one of the exch
 
 ### Available Weapons
 
-There are three freely changeable weapon types
+There are three freely changeable weapon types. Their properties are listed below.
 
 | Name        | Fire rate           | Range  | Damage |
 | ------------- |:-------------:|:-----:|:-----:|
@@ -70,7 +68,29 @@ We provide binaries for windows and linux-based systems.
 
 **TODO**: HTML5??
 
-## Used technologies
+## Used technologies and resources
+
+The game was created with the [godot engine](https://godotengine.org/).
+
+**Additional utilized software solutions**
+
+* [Inkscape](https://inkscape.org/de/) for the splash screen
+* [Gimp](https://www.gimp24.de/) for backgrounds / simple graphic modification
+* [Piskel](https://www.piskelapp.com/) for very simple tile graphics
+* [OpenSCAD](https://www.openscad.org/downloads.html) to generate the player graphics
+* [Abletron Live 10](https://www.ableton.com/en/live/) for sound effect creation
+
+## Used third-party assets
+
+**Sounds**
+
+* [Cash register sample](https://freesound.org/people/kiddpark/sounds/201159/)
+
+**Fonts**
+
+* [Noto Mono](https://www.google.com/get/noto/)
+* [Cash Currency Font](https://www.dafont.com/cash-currency.font)
+
 
 ## Contributors
 
