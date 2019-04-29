@@ -108,6 +108,29 @@ func get_random_valid_position():
 		collision = test_move(Transform2D(0, freePosition), Vector2(0.1, 0.1))
 	
 	return freePosition
+	
+func get_random_valid_position_nearby(pos: Vector2, radius, max_tries = 100):
+	var size = get_viewport().size
+	var freePosition
+	var collision = true
+	
+	var min_x = max(0, pos.x - radius)
+	var max_x = min(size.x, pos.x + radius)
+	var min_y = max(0, pos.y - radius)
+	var max_y = min(size.y, pos.y + radius)
+	
+	var tries = 0
+	
+	while collision:
+		# just generate some random position and check whether we can actually be there
+		freePosition = Vector2(min_x + randi() % int(max_x - min_x), min_y + randi() % int(max_y - min_y))
+		collision = test_move(Transform2D(0, freePosition), Vector2(0.1, 0.1))
+		
+		tries += 1
+		if tries >= max_tries:
+			return null
+	
+	return freePosition
 
 func reset_health():
 	health = max_health
@@ -149,10 +172,14 @@ func damage(damage):
 		destroy()
 		
 func destroy():
+	if dead:
+		return
+		
 	emit_signal("player_death")
+	play_death_animation()
+	
 	dead = true
 	$HealthBar.queue_free()
-	play_death_animation()
 	update()
 
 func swap_weapon():
@@ -183,21 +210,36 @@ func get_weapon():
 	weapon.player = self
 	return weapon
 
+var dealth_anim
+
 func play_death_animation():
-	var anim = death_animation.instance()
-	anim.emitting = true
-	anim.get_process_material().scale = .5
-	anim.set_one_shot(false)
-	anim.get_process_material().initial_velocity = 400
+	if dead:
+		return
+	
+	dealth_anim = death_animation.instance()
+	dealth_anim.emitting = true
+	dealth_anim.get_process_material().scale = .5
+	dealth_anim.set_one_shot(false)
+	dealth_anim.get_process_material().initial_velocity = 400
 
 	var timer = Timer.new()
 	timer.set_wait_time(death_animation_duration)
-	timer.connect("timeout", self, "queue_free")
+	timer.connect("timeout", self, "disable_player")
 	
-	add_child(anim)
+	add_child(dealth_anim)
 	add_child(timer)
 	
-	timer.start()	
+	timer.start()
+
+var already_disabled = false
+
+func disable_player():
+	if already_disabled:
+		return
+		
+	already_disabled = true
+	dealth_anim.emitting = false
+	get_node("CollisionShape2D").queue_free()
 	
 func kill_self():
 	queue_free()
