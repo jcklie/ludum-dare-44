@@ -11,17 +11,18 @@ class ValueSource:
 	var symbol
 	var color: Color
 	
-	var key_timespan = 4
+	var key_timespan
 	var future_lookahead
 	
-	func _init(currency, future_lookahead):
+	func _init(currency, future_lookahead, key_timespan):
 		self.currency = currency
 		self.color = Global.colors[currency]
 		self.symbol = Global.symbols[currency]
 		self.future_lookahead = future_lookahead
+		self.key_timespan = key_timespan
 	
 	func generate_value(gametime):
-		return randi() % 10
+		return randf()
 	
 	func process(total_elapsed):
 		while len(values) == 0 or timestamps[len(timestamps) - 1] <= total_elapsed + future_lookahead:
@@ -55,11 +56,9 @@ export var border_size = 5
 # the point in the chart which is considered as "now"
 var now_x = x + width * 0.25
 
-# max value used for scaling
-# WARNING: NEEDS TO BE ADAPTED ACCORDING TO THE GENERATION!
-var max_value = 10
 # the width of one second in pixels
-export var second_width = 10
+export var second_width = 3
+var key_timespan = 18
 
 # currently active value sources
 var sources = {}
@@ -73,14 +72,23 @@ func _ready():
 	var future_lookahead = ceil(0.75 * width / second_width) + 1
 	# Add all currencies to the chart
 	for currency in Global.currencies:
-		sources[currency] = ValueSource.new(currency, future_lookahead)
+		sources[currency] = ValueSource.new(currency, future_lookahead, key_timespan)
 
-func get_currency_value(currency):
+func get_currency_absolute_value(currency):
 	"""
-	Get the value of the given currency (type Global.Currency) at the last gametime.
+	Get the (real) value of the given currency (type Global.Currency) at the last gametime.
 	"""
 	
 	return sources[currency].get_current_value(total_elapsed)
+
+func get_currency_scale(currency):
+	"""
+	Get the scaling of the given currency (type Global.Currency).
+	"""
+	
+	var value = get_currency_absolute_value(currency)
+	# bring values into range [0.5, 1.5]
+	return 0.5 + value
 
 func generate_legend():
 	legend.clear()
@@ -93,10 +101,11 @@ func generate_legend():
 
 		legend.push_color(valueSource.color)
 		legend.add_text(valueSource.symbol)
+		legend.add_text(str(int(get_currency_absolute_value(currency)*100)))
 		
 		i += 1
 		if i < size:
-			legend.add_text("  ")
+			legend.add_text(" ")
 	
 
 func _process(delta):
@@ -117,7 +126,7 @@ func get_timestamp_x(timestamp):
 	return (timestamp - total_elapsed) * second_width
 	
 func get_scaled_value(value):
-	return value * height / max_value
+	return value * height
 
 func draw_line_clipped(a: Vector2, b: Vector2, color: Color, line_width: float):
 	"""
