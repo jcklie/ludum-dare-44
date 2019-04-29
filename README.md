@@ -76,7 +76,7 @@ The game was created with the [godot engine](https://godotengine.org/).
 * [Gimp](https://www.gimp24.de/) for backgrounds / simple graphic modifications
 * [Piskel](https://www.piskelapp.com/) for very simple tile graphics
 * [OpenSCAD](https://www.openscad.org/downloads.html) to generate the player and cash exchange station graphics
-* [Abletron Live 10](https://www.ableton.com/en/live/) for sound effect creation
+* [Ableton Live 10](https://www.ableton.com/en/live/) for sound effect creation
 
 ## Used third-party assets
 
@@ -92,7 +92,7 @@ The game was created with the [godot engine](https://godotengine.org/).
 
 ## Contributors
 
-This project was created within 72 hours by [jcklie](https://ldjam.com/users/jcklie/), [mburgert](https://ldjam.com/users/mbugert/) and [tomatenbrei](https://ldjam.com/users/tomatenbrei/).
+This project was created within 72 hours by [jcklie](https://ldjam.com/users/jcklie/), [mbugert](https://ldjam.com/users/mbugert/) and [tomatenbrei](https://ldjam.com/users/tomatenbrei/).
 
 
 
