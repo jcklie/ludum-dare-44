@@ -34,6 +34,9 @@ signal player_hurt(source)
 
 var death_animation_duration = 1
 
+var max_raycast_length = 2000
+var show_target_raycast = true
+
 func _ready():
 	# load all animation sprite frames
 	var path_template = "res://player/skin/{skin}/{ani}/{step}.png"
@@ -62,6 +65,8 @@ func _ready():
 	connect("player_hurt", AudioEngine, "_on_player_hurt")
 	connect("player_death", AudioEngine, "_on_player_death")
 
+var target = Vector2(0, 0)
+
 func _process(delta):
 	if dead:
 		# make the player smaller (assumes scale.x = scale.y)
@@ -77,8 +82,16 @@ func _process(delta):
 		# process inputs
 		controller.process_input(delta)
 	
+	var hit = cast_shoot_ray_to(global_position + direction * max_raycast_length)
+	if hit.size() != 0:
+		target = hit["position"]
+	
 	select_animation()
 	update()
+
+func cast_shoot_ray_to(global_pos):
+	var space_state = get_world_2d().direct_space_state
+	return space_state.intersect_ray(global_position, global_pos, [], 4 + 8)
 
 func get_random_valid_position():
 	var size = get_viewport().size
@@ -135,6 +148,7 @@ func destroy():
 	dead = true
 	$HealthBar.queue_free()
 	play_death_animation()
+	update()
 
 func swap_weapon():
 	weapon_idx = (weapon_idx + 1) % weapons.size()
@@ -182,3 +196,8 @@ func play_death_animation():
 	
 func kill_self():
 	queue_free()
+	
+func _draw():
+	if !dead and show_target_raycast:
+		draw_circle(global_transform.inverse() * target, 5, Global.colors[currency])
+		draw_line(global_transform.inverse() * global_position, global_transform.inverse() * target, Global.colors[currency], 1)
