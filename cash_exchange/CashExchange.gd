@@ -13,7 +13,7 @@ signal cash_exchange_state_changed(old_state, new_state)
 # local constants
 const SECONDS_FOR_EXCHANGING = 2
 const COOLDOWN_UNTIL_OPEN = 5
-const COOLDOWN_UNTIL_FIRST_OPEN = 10
+const COOLDOWN_UNTIL_FIRST_OPEN = 7
 
 # game state
 var currency
@@ -21,7 +21,11 @@ var state
 var player_id_in_exchange = null
 
 # UI-related stuff
-const ANIMATION_STEPS_PER_STATE = 1
+var animation_steps_per_state = {
+	"Open": 1,
+	"Closed": 1,
+	"Exchanging": 16
+}
 var sprite_frames
 
 func initialize(currency):
@@ -31,8 +35,8 @@ func initialize(currency):
 	var path_template = "res://cash_exchange/{currency}/{state}/{step}.png"
 	sprite_frames = SpriteFrames.new()
 	for ani_state in CashExchangeState:
-		sprite_frames.add_animation(ani_state)
-		for step in ANIMATION_STEPS_PER_STATE:
+		sprite_frames.add_animation(ani_state)		
+		for step in range(animation_steps_per_state[ani_state]):
 			var path = path_template.format({"currency": Global.skins[currency], "state": ani_state, "step": step})
 			sprite_frames.add_frame(ani_state, load(path))
 
@@ -43,6 +47,8 @@ func _ready():
 	
 	# attach frames
 	$AnimatedSprite.frames = sprite_frames
+	$AnimatedSprite.speed_scale = 4
+	$AnimatedSprite.playing = true
 	
 	# all exchanges start closed, open after a while
 	state = CashExchangeState.Closed
