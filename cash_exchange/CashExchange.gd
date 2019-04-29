@@ -11,7 +11,7 @@ var CashExchangeValues = {
 signal cash_exchange_state_changed(old_state, new_state)
 
 # local constants
-const SECONDS_FOR_EXCHANGING = 2
+const SECONDS_FOR_EXCHANGING = 1
 const COOLDOWN_UNTIL_OPEN = 5
 const COOLDOWN_UNTIL_FIRST_OPEN = 7
 
@@ -90,6 +90,7 @@ func _start_exchange(player_id):
 	# make player immobile, invincible and put to center of shop
 	player_obj.immobile = true
 	player_obj.invincible = true
+	player_obj.scale = Vector2(0,0)
 	player_obj.position = position
 	
 	# while exchanging, the shop is solid on the outside and the trigger on the inside is disabled
@@ -107,6 +108,7 @@ func _close_shop():
 	player_obj.immobile = false
 	player_obj.invincible = false
 	player_obj.velocity *= -1
+	player_obj.scale = Vector2(1,1)
 	player_obj.dash()
 	$TransParticles.emitting = false
 	
