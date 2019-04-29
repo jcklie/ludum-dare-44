@@ -187,6 +187,9 @@ func destroy():
 
 func swap_weapon():
 	weapon_idx = (weapon_idx + 1) % weapons.size()
+	
+func swap_weapon_random():
+	weapon_idx = randi() % weapons.size()
 
 func set_movement(movementDirection, facingDirection):
 	self.velocity = movementDirection * speed

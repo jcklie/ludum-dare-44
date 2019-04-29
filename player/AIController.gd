@@ -30,6 +30,9 @@ var current_facing_direction = Vector2(0, 0)
 var facing_turn_speed = 5
 var facing_distance_fire_threshold = 0.2
 
+var goal_debug_visualize = false
+
+var weapon_swap_time_elapsed = 0
 
 # Called when the node enters the scene tree for the first time.
 func init():
@@ -52,6 +55,7 @@ func get_nearest_player():
 	return nearest_player
 
 func process_input(delta):
+	weapon_swap_time_elapsed += delta
 	
 	# Check whether we moved less than "newgoal_distance_threshold" in the last
 	# "newgoal_check_timespan" seconds. When this is the case, move to a new goal.
@@ -132,11 +136,24 @@ func process_input(delta):
 	if target_player != null:
 		var hit = player.cast_shoot_ray_to(target_player.global_position)
 		if hit.size() != 0 and hit.collider == target_player:
+			var pos_diff = (target_player.global_position - global_position)
 			# focus the target player when visible
-			facingDirection = (target_player.global_position - global_position).normalized()
+			facingDirection = pos_diff.normalized()
 			
 			# fire the weapon when we are almost facing the same direction
 			if facingDirection.distance_to(current_facing_direction) <= facing_distance_fire_threshold:
+				# we need to decide which weapon to choose
+				var current_weapon = player.get_weapon()
+				
+				# hacky: swap weapons faster when enemy is out of range
+				if current_weapon.get_range() < pos_diff.length():
+					weapon_swap_time_elapsed += delta 
+				
+				if (current_weapon.fireDelay > 0 or current_weapon.get_range() < pos_diff.length()) and weapon_swap_time_elapsed >= Global.ai_min_weapon_swap_time:
+					weapon_swap_time_elapsed = 0
+					player.swap_weapon_random()
+
+					
 				player.shoot(delta)
 			
 		else:
@@ -179,5 +196,5 @@ func start_movement():
 	navigation_done = false
 
 func _draw():
-	if !player.dead and goal != null:
+	if goal_debug_visualize and !player.dead and goal != null:
 		draw_circle(global_transform.inverse() * goal, 10, Global.colors[player.currency])

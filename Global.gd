@@ -3,6 +3,9 @@ extends Node
 const IDLE = "idle"
 const SKIN_ANGULAR_STEPS = 16
 
+# 0 is really insame
+var ai_min_weapon_swap_time = 2
+
 enum Currency {Euro, Dollar, Yen, Pound}
 
 # The lineChart singleton has to be assigned to this variable

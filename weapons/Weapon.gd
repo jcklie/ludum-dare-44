@@ -26,7 +26,10 @@ func _process(delta):
 	if fireDelay <= 0 and not reloaded:
 		reloaded = true
 		emit_signal("weapon_reload", name, self)
-		
+
+func get_range():
+	return MaxTimeToLive * Velocity
+
 func shoot(fromPlayer, delta):
 	if fireDelay > 0 || live_bullets >= MaxBullets:
 		return
