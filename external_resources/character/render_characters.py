@@ -18,7 +18,7 @@ def render_characters():
     characters = {"eur": ("€", "[0.269, 0.347, 0.953]"),
                   "usd": ("$", "[0, 1.0, 0]"),
                   "gbp": ("£", "[1.0, 0.65, 0]"),
-                  "yen": ("¥", "[0.63, 0.14, 0.94]")}
+                  "yen": ("¥", "[0.7, 0.3, 0.95]")}
 
     scad_filename = os.path.abspath("character.scad")
     camera_rot_x_steps = 16
@@ -37,6 +37,7 @@ def render_characters():
 
             parameters = {"char": '\"' + char + '\"',
                           "char_color": color,
+                          "angry": "false",
                           "$fn": 100}
 
             parameter_string = "\'" + ";".join([k + "=" + str(v) for k,v in parameters.items()]) + "\'"
@@ -61,5 +62,25 @@ def render_splash_screen():
 
     run_openscad_render(openscad_options, scad_filename, output_filename)
 
-render_splash_screen()
-render_characters()
+
+def render_character_profiles():
+    image_width = 1024
+    image_height = 576
+
+    parameters = {"eur": "--camera=3.32,0.74,4.9,113.8,0,58.6,54.24",
+                  "usd": "--camera=2.39,-0.46,5.62,102.60,0,49.50,60.27",
+                  "gbp": "--camera=2.64,3.31,7.28,112.4,0,52.3,43.93",
+                  "yen": "--camera=0.63,1.26,4.97,84.4,0,50.2,54.24"}
+
+    for k, cam_settings in parameters.items():
+        openscad_options = [f"-D \'scene=\"{k}\"\'",
+                            cam_settings,
+                            f"--imgsize={image_width},{image_height}",
+                            "--autocenter"]
+        output_filename = os.path.abspath(f"{k}_profile.png")
+        run_openscad_render(openscad_options, "character_profile.scad", output_filename)
+
+
+#render_splash_screen()
+#render_characters()
+render_character_profiles()
