@@ -15,8 +15,8 @@ var ani = IDLE
 onready var weapons = $Weapons.get_children()
 var weapon_idx = 0
 
-var max_health: int = 100
-onready var health = max_health
+var max_health: float = 100
+onready var health: float = max_health
 var dead : bool = false
 
 const DASH_MAX_COOLDOWN = 1.5
@@ -114,7 +114,7 @@ func shoot(delta):
 	
 	var weapon = get_weapon()
 	if weapon:
-		weapon.shoot(delta)
+		weapon.shoot(self, delta)
 
 func select_animation():
 	var rotation_degs = rad2deg(get_angle_to(position + direction)) + 180
@@ -138,7 +138,8 @@ func damage(damage):
 	$HitParticles.emitting = true
 	emit_signal("player_hurt", self)
 	
-	health -= damage
+	health -= damage / get_strength()
+	# print("Lost health: " + str(damage / get_strength()))
 	if health < 0:
 		emit_signal("player_life_lost")
 		destroy()
@@ -197,6 +198,12 @@ func play_death_animation():
 func kill_self():
 	queue_free()
 	
+func get_strength():
+	"""
+	Player strength is a factor for player damage / defense (use multiplication / division).
+	"""
+	return Global.get_currency_scaling(currency)
+
 func _draw():
 	if !dead and show_target_raycast:
 		draw_circle(global_transform.inverse() * target, 5, Global.colors[currency])

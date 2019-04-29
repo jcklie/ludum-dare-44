@@ -74,6 +74,8 @@ func _ready():
 	for currency in Global.currencies:
 		sources[currency] = ValueSource.new(currency, future_lookahead, key_timespan)
 
+	Global.line_chart = self
+
 func get_currency_absolute_value(currency):
 	"""
 	Get the (real) value of the given currency (type Global.Currency) at the last gametime.

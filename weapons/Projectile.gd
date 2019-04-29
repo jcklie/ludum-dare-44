@@ -2,7 +2,7 @@ extends Area2D
 
 var velocity : Vector2
 var player_id: int
-var damage: int
+var damage: float
 var dead = false
 
 onready var notifier = get_node("Notifier")
