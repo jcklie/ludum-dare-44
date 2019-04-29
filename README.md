@@ -1,5 +1,9 @@
 # Ludum Dare 44: Cash Clash
 
+<p align="center" style="background-color:cornflowerblue">
+<img src="menu/splash_screen.png"/>
+</p>
+
 Created for Ludum Dare 44 ("Your life is currency").
 
 ## Concept
@@ -66,8 +70,12 @@ We provide binaries for windows and linux-based systems.
 
 **TODO**: HTML5??
 
+## Used technologies
+
 ## Contributors
 
 This project was created within 72 hours by [jcklie](https://ldjam.com/users/jcklie/), [mburgert](https://ldjam.com/users/mbugert/) and [tomatenbrei](https://ldjam.com/users/tomatenbrei/).
+
+
 
 
