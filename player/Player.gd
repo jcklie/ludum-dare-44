@@ -61,6 +61,8 @@ func init():
 	# register sounds
 	connect("player_hurt", AudioEngine, "_on_player_hurt")
 	connect("player_death", AudioEngine, "_on_player_death")
+	
+	$IDText.text = str(player_id)
 
 func update_currency(new_currency):
 	# change health according to current value
