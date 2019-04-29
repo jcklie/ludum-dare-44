@@ -19,47 +19,61 @@ font_data = ExtResource( 3 )
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="TextureRect" type="TextureRect" parent="."]
 show_behind_parent = true
 margin_right = 1024.0
 margin_bottom = 576.0
 texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="VBoxContainer" type="Container" parent="."]
-margin_left = 800.0
-margin_top = 352.0
-margin_right = 1007.0
-margin_bottom = 486.0
+margin_left = 769.0
+margin_top = 343.0
+margin_right = 976.0
+margin_bottom = 477.0
 script = ExtResource( 2 )
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
-margin_right = 207.0
-margin_bottom = 45.0
+margin_top = -25.0
+margin_right = 222.0
+margin_bottom = 20.0
 custom_fonts/font = SubResource( 1 )
 text = "Start"
 
-[node name="PlayersSpinner" type="SpinBox" parent="VBoxContainer"]
-margin_top = 49.0
+[node name="ControlsButton" type="Button" parent="VBoxContainer"]
+margin_top = 75.0
 margin_right = 207.0
-margin_bottom = 94.0
+margin_bottom = 120.0
+custom_fonts/font = SubResource( 2 )
+text = "Controls"
+
+[node name="ExitButton" type="Button" parent="VBoxContainer"]
+margin_top = 128.0
+margin_right = 222.0
+margin_bottom = 173.0
+custom_fonts/font = SubResource( 2 )
+text = "Exit"
+
+[node name="PlayersSpinner" type="SpinBox" parent="VBoxContainer"]
+margin_top = 24.0
+margin_right = 222.0
+margin_bottom = 69.0
 min_value = 1.0
 max_value = 3.0
 value = 1.0
 align = 2
 
-[node name="ExitButton" type="Button" parent="VBoxContainer"]
-margin_top = 100.0
-margin_right = 207.0
-margin_bottom = 145.0
-custom_fonts/font = SubResource( 2 )
-text = "Exit"
-
 [node name="Label" type="Label" parent="VBoxContainer"]
 margin_left = 10.0
-margin_top = 54.0
+margin_top = 29.0
 margin_right = 217.0
-margin_bottom = 93.0
+margin_bottom = 68.0
 custom_fonts/font = SubResource( 3 )
 text = "Number
  of players"
