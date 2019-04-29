@@ -2,7 +2,8 @@ extends Node2D
 
 var levels = [
 	#preload("res://levels/Arena.tscn")
-	preload("res://levels/EmptyArena.tscn")
+	# preload("res://levels/EmptyArena.tscn"),
+	preload("res://levels/MyFirstMap.tscn"),
 ]
 
 var level_class = "res://levels/Level.tscn"
