@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 # TODO ideas:
 # - add random offset to timings (RandomNumberGenerator)
@@ -43,7 +43,7 @@ func _init():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	connect("body_entered", self, "_on_body_enter")
+	$Area2D/InsideShopCollider.connect("body_entered", self, "_on_body_enter")
 	$Timer.connect("timeout", self, "_on_timing_event")
 	
 	# attach frames
@@ -63,7 +63,7 @@ func _on_body_enter(body):
 
 func _on_timing_event():
 	if state == CashExchangeState.Exchanging:
-		_end_exchange()
+		_close_shop()
 	elif state == CashExchangeState.Closed:
 		_open_shop()
 
@@ -75,21 +75,39 @@ func _change_state(new_state):
 func _start_exchange(player_id):
 	player_id_in_exchange = player_id	
 	
+	var player_obj = GameManager.players[player_id]
+	
+	
 	# TODO put player to center of shop
 	# TODO make player immobile
 	# TODO disable player collision
 	# TODO make player invincible
 	
+	# while exchanging, the shop is solid on the outside and the trigger on the inside is disabled
+	$Area2D/InsideShopCollider.disabled = true
+	$StaticBody2D/OutsideShopCollider.disabled = false
 	_change_state(CashExchangeState.Exchanging)
 	$Timer.start(SECONDS_FOR_EXCHANGING)
 
-func _end_exchange():	
+func _close_shop():	
+	
 	# TODO change player currency - use signals?
+	
+	
+	# when kicking out the player, the outer collider must be disabled
+	$StaticBody2D/OutsideShopCollider.disabled = true
 	# TODO dash player to direction he came from
-	player_id_in_exchange = null
+	
+	# while closed, the shop should be solid on the outside
+	$StaticBody2D/OutsideShopCollider.disabled = false
 	
 	_change_state(CashExchangeState.Closed)
 	$Timer.start(COOLDOWN_UNTIL_OPEN)
+	
+	player_id_in_exchange = null
 
 func _open_shop():
+	# once open, the outside of the shop is not solid, but the trigger on the inside is enabled
+	$Area2D/InsideShopCollider.disabled = false
+	$StaticBody2D/OutsideShopCollider.disabled = true
 	_change_state(CashExchangeState.Open)
