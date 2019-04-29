@@ -6,3 +6,4 @@ func _ready():
 	Velocity = 800
 	Damage = 10
 	MaxBullets = 5
+	MaxTimeToLive = .3

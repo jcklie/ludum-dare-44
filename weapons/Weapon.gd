@@ -7,6 +7,8 @@ var MaxFireDelay
 var Velocity : float
 var Damage : int
 var MaxBullets : int
+var MaxTimeToLive : float = 100
+var HasLaser = false
 
 var fireDelay : float = 0
 var reloaded : bool = true
@@ -36,6 +38,7 @@ func shoot(fromPlayer, delta):
 	newProjectile.player_id = player.player_id
 	newProjectile.damage = Damage * fromPlayer.get_strength()
 	# print("Shooting with damage: " + str(newProjectile.damage))
+	newProjectile.timeToLive = MaxTimeToLive 
 	newProjectile.connect("bullet_died", self, "_on_bullet_died")
 	live_bullets += 1
 	
