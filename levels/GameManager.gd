@@ -2,8 +2,10 @@ extends Node2D
 
 var levels = [
 	#preload("res://levels/Arena.tscn")
-	preload("res://levels/EmptyArena.tscn"),
-	preload("res://levels/BlockFortKnox.tscn")
+	# preload("res://levels/EmptyArena.tscn"),
+	preload("res://levels/BlockFortKnox.tscn"),
+	preload("res://levels/MyFirstMap.tscn"),
+	preload("res://levels/SmallRiver.tscn"),
 ]
 
 var level_class = "res://levels/Level.tscn"
@@ -21,13 +23,19 @@ var life_players = []
 var winning_player = -1
 var winning_currency = ""
 
+var last_map_idx = -1
+
 signal game_over
 
 func _ready():
 	connect("game_over", AudioEngine, "_on_game_over")
 
 func start_random_level():
-	current_level_scene = levels[randi() % levels.size()]
+	seed(OS.get_system_time_msecs())
+	var next_level_idx = get_random_map_idx()
+	last_map_idx = next_level_idx
+	
+	current_level_scene = levels[next_level_idx]
 	get_tree().change_scene(level_class)
 	
 	players = {}
@@ -47,4 +55,12 @@ func _on_player_death(player_id):
 func show_menu():
 	get_tree().change_scene(menu_class)
 		
- 
+func get_random_map_idx():
+	var result = 0
+	for i in range(100):
+		result = randi() % levels.size()
+		if result != last_map_idx:
+			return result
+			
+	return result
+		

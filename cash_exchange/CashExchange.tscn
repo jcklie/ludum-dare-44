@@ -1,9 +1,20 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://cash_exchange/CashExchange.gd" type="Script" id=1]
+[ext_resource path="res://cash_exchange/star.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
+
+[sub_resource type="ParticlesMaterial" id=2]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = -100.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 90.0
+scale = 0.4
 
 [node name="CashExchange" type="Node2D"]
 script = ExtResource( 1 )
@@ -28,4 +39,12 @@ one_way_collision_margin = 0.0
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="TransParticles" type="Particles2D" parent="."]
+emitting = false
+amount = 7
+lifetime = 0.2
+explosiveness = 0.3
+process_material = SubResource( 2 )
+texture = ExtResource( 2 )
 

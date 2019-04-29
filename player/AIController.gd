@@ -39,7 +39,7 @@ func init():
 	nav = GameManager.current_level.get_node("Navigation2D")
 	
 	# Update when the player died (to reset _draw)
-	player.connect("player_death", self, "update")
+	player.connect("player_death", self, "_on_player_death")
 
 func get_nearest_player():
 	var smallestDistance = 100000
@@ -198,3 +198,6 @@ func start_movement():
 func _draw():
 	if goal_debug_visualize and !player.dead and goal != null:
 		draw_circle(global_transform.inverse() * goal, 10, Global.colors[player.currency])
+
+func _on_player_death(player_id):
+	update()
