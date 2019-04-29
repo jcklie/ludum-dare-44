@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://tiles/Tiles.tres" type="TileSet" id=1]
 [ext_resource path="res://tiles/DestroyableTiles.gd" type="Script" id=2]
-[ext_resource path="res://player/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://player/Controller.gd" type="Script" id=4]
-[ext_resource path="res://player/AIManager.gd" type="Script" id=5]
+[ext_resource path="res://cash_exchange/CashExchangeSpawner.gd" type="Script" id=3]
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://player/Controller.gd" type="Script" id=5]
+[ext_resource path="res://player/AIManager.gd" type="Script" id=6]
+
 
 [node name="Arena" type="Node2D"]
 
@@ -25,6 +27,14 @@ collision_mask = 5
 format = 1
 tile_data = PoolIntArray( 196611, 10, 0, 196617, 10, 0, 196635, 10, 0, 262163, 10, 0, 458756, 10, 0, 458778, 10, 0, 524310, 10, 0, 589832, 10, 0, 720901, 10, 0, 851984, 10, 0, 917509, 10, 0, 917512, 10, 0, 917523, 10, 0, 917530, 10, 0 )
 script = ExtResource( 2 )
+
+[node name="CashExchangeShops" type="TileMap" parent="."]
+z_index = 1
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 327689, 13, 0 )
+script = ExtResource( 3 )
 
 [node name="Background" type="TileMap" parent="."]
 position = Vector2( -2, -1 )
@@ -47,24 +57,24 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Player1" parent="." instance=ExtResource( 3 )]
+[node name="Player1" parent="." instance=ExtResource( 4 )]
 position = Vector2( 192, 160 )
 collision_mask = 11
 player_id = 1
 controllerPath = NodePath("PlayerController")
 
 [node name="PlayerController" type="Node2D" parent="Player1"]
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 
-[node name="Player2" parent="." instance=ExtResource( 3 )]
+[node name="Player2" parent="." instance=ExtResource( 4 )]
 position = Vector2( 736, 96 )
 player_id = 2
 controllerPath = NodePath("PlayerController")
 
 [node name="PlayerController" type="Node2D" parent="Player2"]
 position = Vector2( -544, 64 )
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 
 [node name="AIManager" type="Node2D" parent="."]
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 
