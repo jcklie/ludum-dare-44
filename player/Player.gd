@@ -61,6 +61,8 @@ func init():
 	# register sounds
 	connect("player_hurt", AudioEngine, "_on_player_hurt")
 	connect("player_death", AudioEngine, "_on_player_death")
+	
+	$IDText.text = str(player_id)
 
 func update_currency(new_currency):
 	# change health according to current value
@@ -187,6 +189,9 @@ func destroy():
 
 func swap_weapon():
 	weapon_idx = (weapon_idx + 1) % weapons.size()
+	
+func swap_weapon_random():
+	weapon_idx = randi() % weapons.size()
 
 func set_movement(movementDirection, facingDirection):
 	self.velocity = movementDirection * speed
