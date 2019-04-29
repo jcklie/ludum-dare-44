@@ -87,8 +87,8 @@ func _start_exchange(player_id):
 	player_obj.position = position
 	
 	# while exchanging, the shop is solid on the outside and the trigger on the inside is disabled
-	$Area2D/InsideShopCollider.disabled = true
-	$StaticBody2D/OutsideShopCollider.disabled = false
+	set_deferred("Area2D/InsideShopCollider.disabled", true)
+	set_deferred("StaticBody2D/OutsideShopCollider.disabled", false)
 	_change_state(CashExchangeState.Exchanging)
 	$Timer.start(SECONDS_FOR_EXCHANGING)
 
@@ -99,7 +99,7 @@ func _close_shop():
 	# when kicking out the player, the outer collider must be temporarily disabled
 	$StaticBody2D/OutsideShopCollider.disabled = true
 	player_obj.immobile = false
-	player_obj.invincible = true
+	player_obj.invincible = false
 	player_obj.velocity *= -1
 	player_obj.dash()
 	
