@@ -19,9 +19,7 @@ var player
 
 var last_direction = Vector2(1, 0)
 
-func _ready():
-	player = get_parent()
-
+func init():
 	key_left = "player_%s_left" % player.player_id
 	key_right = "player_%s_right" % player.player_id
 	key_up = "player_%s_up" % player.player_id
@@ -38,7 +36,7 @@ func _ready():
 
 func process_input(delta):
 	# Get the input of the player
-	
+		
 	# Actions
 	if Input.is_action_just_pressed(key_special):
 		player.dash()
@@ -67,7 +65,8 @@ func process_input(delta):
 	
 func get_facing_direction():
 	if player.player_id == 1:
-		return (get_global_mouse_position() - global_position).normalized()
+		var x = (get_global_mouse_position() - global_position).normalized()
+		return x
 	else:
 		var horizontal = Input.get_action_strength(key_rright) - Input.get_action_strength(key_rleft)
 		var vertical = Input.get_action_strength(key_rdown) - Input.get_action_strength(key_rup)

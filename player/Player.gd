@@ -4,11 +4,14 @@ const IDLE = "idle"
 const SKIN_ANGULAR_STEPS = 16
 
 var death_animation = preload("res://player/HitParticles.tscn")
+var player_controller = preload("res://player/Controller.gd")
+var ai_controller =  preload("res://player/AIController.gd")
 
-export(int) var player_id
-export (int) var speed = 200
+var player_id
+var speed = 200
 export(Global.Currency) var currency = Global.Currency.Euro
-export(NodePath) var controllerPath
+var is_ai = false
+
 var controller
 var ani = IDLE
 
@@ -26,6 +29,8 @@ var dash_cooldown = 0
 var velocity = Vector2()
 var direction = Vector2()
 
+var target = Vector2(0, 0)
+
 # Signals
 
 signal player_life_lost
@@ -37,7 +42,16 @@ var death_animation_duration = 1
 var max_raycast_length = 2000
 var show_target_raycast = true
 
-func _ready():
+func init():
+	if not is_ai:
+		controller = player_controller.new()
+	else:
+		controller = ai_controller.new()
+		
+	controller.player = self
+	controller.init()
+	add_child(controller)
+	
 	# load all animation sprite frames
 	var path_template = "res://player/skin/{skin}/{ani}/{step}.png"
 	var sf = SpriteFrames.new()
@@ -50,22 +64,12 @@ func _ready():
 			sf.add_frame(ani_ang_step, load(path))
 	
 	$AnimatedSprite.frames = sf
-		
-	set_collision_layer_bit(0, false)
-	set_collision_layer_bit(player_id, true)
-	
-	collision_mask = 0xFF
 	
 	$DashTimer.connect("timeout", self, "_on_DashTimer_timeout")
 	
-	if controllerPath != "":
-		controller = get_node(controllerPath)
-		
 	# register sounds
 	connect("player_hurt", AudioEngine, "_on_player_hurt")
 	connect("player_death", AudioEngine, "_on_player_death")
-
-var target = Vector2(0, 0)
 
 func _process(delta):
 	if dead:

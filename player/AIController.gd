@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var nav = get_tree().get_root().get_node("Main/World/Navigation2D")
+var nav
 
 var navigation_done = true
 var path
@@ -15,7 +15,7 @@ var newgoal_last_position
 var newgoal_delta_sum
 var newgoal_tracked_distance
 
-onready var player = get_parent()
+var player
 
 func process_input(delta):
 	if navigation_done:
@@ -57,7 +57,12 @@ func process_input(delta):
 	update()
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func init():
+	print("Hello AI", player.player_id)
+	print(GameManager.current_level.get_children())
+	
+	nav = GameManager.current_level.get_node("Navigation2D")
+	
 	move_to_new_goal()
 	# Update when the player died (to reset _draw)
 	player.connect("player_death", self, "update")
