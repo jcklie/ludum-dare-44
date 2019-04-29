@@ -23,6 +23,7 @@ config/icon="res://icon.png"
 
 Global="*res://Global.gd"
 AudioEngine="*res://audio/AudioEngine.tscn"
+GameManager="*res://levels/GameManager.gd"
 
 [display]
 
