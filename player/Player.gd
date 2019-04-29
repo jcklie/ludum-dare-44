@@ -1,8 +1,5 @@
 extends KinematicBody2D
 
-const IDLE = "idle"
-const SKIN_ANGULAR_STEPS = 16
-
 var death_animation = preload("res://player/HitParticles.tscn")
 var player_controller = preload("res://player/Controller.gd")
 var ai_controller =  preload("res://player/AIController.gd")
@@ -13,7 +10,7 @@ export(Global.Currency) var currency = Global.Currency.Euro
 var is_ai = false
 
 var controller
-var ani = IDLE
+var ani = Global.IDLE
 
 onready var weapons = $Weapons.get_children()
 var weapon_idx = 0
@@ -52,24 +49,26 @@ func init():
 	controller.init()
 	add_child(controller)
 	
-	# load all animation sprite frames
-	var path_template = "res://player/skin/{skin}/{ani}/{step}.png"
-	var sf = SpriteFrames.new()
-	for ani in [IDLE]:
-		for ang_step in range(SKIN_ANGULAR_STEPS):
-			var ani_ang_step = ani + "_" + str(ang_step)
-			sf.add_animation(ani_ang_step)
-			# we only one frame per animation right now
-			var path = path_template.format({"skin": Global.skins[currency], "ani": ani, "step": ang_step})
-			sf.add_frame(ani_ang_step, load(path))
-	
-	$AnimatedSprite.frames = sf
+	update_currency_visuals()
 	
 	$DashTimer.connect("timeout", self, "_on_DashTimer_timeout")
 	
 	# register sounds
 	connect("player_hurt", AudioEngine, "_on_player_hurt")
 	connect("player_death", AudioEngine, "_on_player_death")
+
+func update_currency(new_currency):
+	# change health according to current value
+	var scaling_factor = Global.get_currency_scaling(currency) / Global.get_currency_scaling(new_currency)
+	health = min(max_health, max(health, 10) * scaling_factor)
+	# set the new currency
+	currency = new_currency
+	# select the curren sprite frames
+	$AnimatedSprite.frames = Global.sprite_frames[currency]
+
+func update_currency_visuals():
+	# select the curren sprite frames
+	$AnimatedSprite.frames = Global.sprite_frames[currency]
 
 func _process(delta):
 	if dead:
@@ -78,7 +77,7 @@ func _process(delta):
 		scale.x = new_scale_x
 		scale.y = new_scale_x
 		return
-		
+	
 	if not dashing:
 		dash_cooldown -= delta
 	
@@ -145,7 +144,7 @@ func shoot(delta):
 
 func select_animation():
 	var rotation_degs = rad2deg(get_angle_to(position + direction)) + 180
-	var ani_ang_step =  int(round(SKIN_ANGULAR_STEPS/2 + SKIN_ANGULAR_STEPS * (rotation_degs / 360.0))) % SKIN_ANGULAR_STEPS
+	var ani_ang_step =  int(round(Global.SKIN_ANGULAR_STEPS/2 + Global.SKIN_ANGULAR_STEPS * (rotation_degs / 360.0))) % Global.SKIN_ANGULAR_STEPS
 	var ani_name = ani + "_" + str(ani_ang_step)
 	$AnimatedSprite.animation = ani_name
 	
