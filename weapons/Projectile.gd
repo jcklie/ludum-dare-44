@@ -2,7 +2,9 @@ extends Area2D
 
 var velocity : Vector2
 var player_id: int
-var damage: int
+var damage: float
+var timeToLive : float
+
 var dead = false
 
 onready var notifier = get_node("Notifier")
@@ -16,6 +18,9 @@ func _ready():
 	
 func _process(delta):
 	move(delta)
+	timeToLive -= delta
+	if timeToLive < 0:
+		die()
 
 func move(delta):
 	global_position += velocity * delta

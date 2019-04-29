@@ -7,6 +7,8 @@ var MaxFireDelay
 var Velocity : float
 var Damage : int
 var MaxBullets : int
+var MaxTimeToLive : float = 100
+var HasLaser = false
 
 var fireDelay : float = 0
 var reloaded : bool = true
@@ -25,7 +27,7 @@ func _process(delta):
 		reloaded = true
 		emit_signal("weapon_reload", name, self)
 		
-func shoot(delta):
+func shoot(fromPlayer, delta):
 	if fireDelay > 0 || live_bullets >= MaxBullets:
 		return
 		
@@ -34,7 +36,9 @@ func shoot(delta):
 	newProjectile.rotation = player.direction.angle()
 	newProjectile.velocity = player.direction.normalized() * Velocity
 	newProjectile.player_id = player.player_id
-	newProjectile.damage = Damage
+	newProjectile.damage = Damage * fromPlayer.get_strength()
+	# print("Shooting with damage: " + str(newProjectile.damage))
+	newProjectile.timeToLive = MaxTimeToLive 
 	newProjectile.connect("bullet_died", self, "_on_bullet_died")
 	live_bullets += 1
 	
