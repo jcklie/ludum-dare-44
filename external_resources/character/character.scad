@@ -51,4 +51,5 @@ module pair_of_eyes(angry = false) {
 
 char = "€";
 char_color = "red";
-character(char, char_color, angry=true);
+angry = "false";
+character(char, char_color, angry=angry);

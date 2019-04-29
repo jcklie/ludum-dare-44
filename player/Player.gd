@@ -63,11 +63,10 @@ func update_currency(new_currency):
 	health = min(max_health, max(health, 10) * scaling_factor)
 	# set the new currency
 	currency = new_currency
-	# select the curren sprite frames
-	$AnimatedSprite.frames = Global.sprite_frames[currency]
+	update_currency_visuals()
 
 func update_currency_visuals():
-	# select the curren sprite frames
+	# select the current sprite frames
 	$AnimatedSprite.frames = Global.sprite_frames[currency]
 
 func _process(delta):
