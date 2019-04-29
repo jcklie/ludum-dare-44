@@ -58,9 +58,9 @@ Both of them expect controller input signals.
 
 * Movement: Controller left stick
 * Aim: Controller right stick
-* Shoot: **TODO**
-* Dash: **TODO**
-* Change weapon: **TODO**
+* Shoot: R2
+* Dash: L1, R1
+* Change weapon: L2
 
 ## Installation
 
