@@ -29,9 +29,13 @@ The strength of your weapons and your own armor scales in real time with the cur
 
 It is also possible to change your currency. This is possible in one of the exchange stops which are spread over the map. When you switch to a better currency, you will loose health (but gain weapon strength and armor) - switching to a worse currency will increase your health but lower your strength and armor. But keep in mind that the currencies values keep changing! However, you will keep the health you gained.
 
+The game always uses three player characters, each playing as an individual currency. In the main menu, you can define how many of them are controlled by humans. You can only change to other currencies which are not already taken by other players.
+
+***Hint: When you play the game for the first time, you should definitely start it in three players mode** - even when you want to play alone. The AI is quite powerful and would most likely frustrate you when you directly fight against it. In your next rounds, you can decrease the number of human players to two such that the AI takes over a single player character. If you feel prepared enough after some training, you can switch to the true single player mode.*
+
 ### Available Weapons
 
-There are three freely changeable weapon types. Their properties are listed below.
+There are three freely changeable weapon types. Their basic properties are listed below.
 
 | Name        | Fire rate           | Range  | Damage |
 | ------------- |:-------------:|:-----:|:-----:|
@@ -62,12 +66,6 @@ Both of them expect controller input signals.
 * Dash: L1, R1
 * Change weapon: L2
 
-## Installation
-
-We provide binaries for windows and linux-based systems.
-
-**TODO**: HTML5??
-
 ## Used technologies and resources
 
 The game was created with the [godot engine](https://godotengine.org/).
@@ -75,9 +73,9 @@ The game was created with the [godot engine](https://godotengine.org/).
 **Additional utilized software solutions**
 
 * [Inkscape](https://inkscape.org/de/) for the splash screen
-* [Gimp](https://www.gimp24.de/) for backgrounds / simple graphic modification
+* [Gimp](https://www.gimp24.de/) for backgrounds / simple graphic modifications
 * [Piskel](https://www.piskelapp.com/) for very simple tile graphics
-* [OpenSCAD](https://www.openscad.org/downloads.html) to generate the player graphics
+* [OpenSCAD](https://www.openscad.org/downloads.html) to generate the player and cash exchange station graphics
 * [Abletron Live 10](https://www.ableton.com/en/live/) for sound effect creation
 
 ## Used third-party assets
