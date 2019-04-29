@@ -6,7 +6,7 @@ var levels = [
 
 var level_class = "res://levels/Level.tscn"
 
-var MAX_PLAYERS = 4
+var MAX_PLAYERS = 3
 
 # Game State
 var current_level_scene
