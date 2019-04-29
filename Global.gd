@@ -27,6 +27,12 @@ const skins = {
 	Currency.Yen: "yen",
 	Currency.Pound: "gbp"
 }
+var inverse_skins = {
+	"usd": Currency.Dollar,
+	"eur": Currency.Euro,
+	"yen": Currency.Yen,
+	"gbp": Currency.Pound
+}
 
 var sprite_frames = {}
 

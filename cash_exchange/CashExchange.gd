@@ -16,7 +16,7 @@ const COOLDOWN_UNTIL_OPEN = 5
 const COOLDOWN_UNTIL_FIRST_OPEN = 10
 
 # game state
-var currency = Global.Currency.Dollar
+var currency
 var state
 var player_id_in_exchange = null
 
@@ -24,11 +24,9 @@ var player_id_in_exchange = null
 const ANIMATION_STEPS_PER_STATE = 1
 var sprite_frames
 
-# TODO for the future
-func _init():
-	# TODO soon...
-	#self.currency = currency
-	
+func initialize(currency):
+	self.currency = currency
+		
 	# load all animation sprite frames
 	var path_template = "res://cash_exchange/{currency}/{state}/{step}.png"
 	sprite_frames = SpriteFrames.new()
