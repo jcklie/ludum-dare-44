@@ -35,7 +35,7 @@ func shoot(fromPlayer, delta):
 		return
 		
 	var newProjectile = Projectile.instance()
-	newProjectile.position = player.global_position
+	newProjectile.position = player.global_position + player.direction.normalized() * 17
 	newProjectile.rotation = player.direction.angle()
 	newProjectile.velocity = player.direction.normalized() * Velocity
 	newProjectile.player_id = player.player_id
