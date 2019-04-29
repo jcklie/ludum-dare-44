@@ -22,4 +22,6 @@ func _ready():
 			player.is_ai = true
 		
 		GameManager.players[id] = player
+		player.connect("player_death", GameManager, "_on_player_death")
+		
 		player.init()
