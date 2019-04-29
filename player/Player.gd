@@ -4,8 +4,11 @@ var death_animation = preload("res://player/HitParticles.tscn")
 var player_controller = preload("res://player/Controller.gd")
 var ai_controller =  preload("res://player/AIController.gd")
 
+const DEFAULT_SPEED = 200
+const DASH_SPEED = 800
+
 var player_id
-var speed = 200
+var speed = DEFAULT_SPEED
 export(Global.Currency) var currency = Global.Currency.Euro
 var is_ai = false
 
@@ -17,10 +20,12 @@ var weapon_idx = 0
 
 var max_health: float = 100
 onready var health: float = max_health
-var dead : bool = false
+var dead: bool = false
+var immobile: bool = false		# if true, player cannot be moved
+var invincible: bool = false	# if true, player cannot be hurt
 
 const DASH_MAX_COOLDOWN = 1.5
-var dashing : bool = false
+var dashing: bool = false
 var dash_cooldown = 0
 
 var velocity = Vector2()
@@ -148,7 +153,7 @@ func select_animation():
 	$AnimatedSprite.animation = ani_name
 	
 func _physics_process(delta):
-	if dead:
+	if immobile or dead:
 		return
 	
 	if not dashing:
@@ -157,7 +162,7 @@ func _physics_process(delta):
 		move_and_collide(velocity * delta)
 		
 func damage(damage):
-	if dashing or dead:
+	if invincible or dashing or dead:
 		return
 	
 	$HitParticles.emitting = true
@@ -192,13 +197,13 @@ func dash():
 	if dashing or dash_cooldown > 0 or velocity == Vector2():
 		return
 		
-	speed = 800
+	speed = DASH_SPEED
 	dashing = true
 	$DashTimer.start()
 	$DashParticles.emitting = true
 	
 func _on_DashTimer_timeout():
-	speed = 200
+	speed = DEFAULT_SPEED
 	dashing = false
 	dash_cooldown = DASH_MAX_COOLDOWN
 	$DashParticles.emitting = false

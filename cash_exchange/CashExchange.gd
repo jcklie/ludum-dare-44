@@ -1,8 +1,5 @@
 extends Node2D
 
-# TODO ideas:
-# - add random offset to timings (RandomNumberGenerator)
-
 # global stuff
 enum CashExchangeState {Open, Exchanging, Closed}
 var CashExchangeValues = {
@@ -22,7 +19,6 @@ const COOLDOWN_UNTIL_FIRST_OPEN = 10
 var currency = Global.Currency.Dollar
 var state
 var player_id_in_exchange = null
-var player_velocity_on_entry = null
 
 # UI-related stuff
 const ANIMATION_STEPS_PER_STATE = 1
@@ -74,11 +70,9 @@ func _on_timing_event():
 		
 		if shop_allowed_to_open:
 			_open_shop()
-		else:
-			# try again some time
+		else:	# try again some time later
 			$Timer.start(COOLDOWN_UNTIL_OPEN)
 		
-
 func _change_state(new_state):
 	emit_signal("cash_exchange_state_changed", state, new_state)
 	$AnimatedSprite.animation = CashExchangeValues[new_state]
@@ -87,13 +81,12 @@ func _change_state(new_state):
 func _start_exchange(player_id):
 	var player_obj = GameManager.players[player_id]
 	
-	player_id_in_exchange = player_id	
-	player_velocity_on_entry = player_obj.velocity	
-	
-	# TODO put player to center of shop
-	# TODO make player immobile
-	# TODO disable player collision
-	# TODO make player invincible
+	player_id_in_exchange = player_id
+
+	# make player immobile, invincible and put to center of shop
+	player_obj.immobile = true
+	player_obj.invincible = true
+	player_obj.position = position
 	
 	# while exchanging, the shop is solid on the outside and the trigger on the inside is disabled
 	$Area2D/InsideShopCollider.disabled = true
@@ -107,7 +100,9 @@ func _close_shop():
 	
 	# when kicking out the player, the outer collider must be temporarily disabled
 	$StaticBody2D/OutsideShopCollider.disabled = true
-	player_obj.velocity = player_velocity_on_entry * -1
+	player_obj.immobile = false
+	player_obj.invincible = true
+	player_obj.velocity *= -1
 	player_obj.dash()
 	
 	# while closed, the shop should be solid on the outside
@@ -116,9 +111,8 @@ func _close_shop():
 	_change_state(CashExchangeState.Closed)
 	$Timer.start(COOLDOWN_UNTIL_OPEN)
 	
-	# reset
+	# reset for next exchange
 	player_id_in_exchange = null
-	player_velocity_on_entry = null
 
 func _open_shop():
 	# once open, the outside of the shop is not solid, but the trigger on the inside is enabled
