@@ -8,11 +8,12 @@ eye_r = 1;
 eye_pupil_r = 0.5;
 
 
-module character(char) {
-    rotate([90,0,0])
-        translate([0,0,-t]/2)
-            linear_extrude(height=t)
-                text(char, font=font, halign="center");
+module character(char, char_color) {
+    color(char_color)
+        rotate([90,0,0])
+            translate([0,0,-t]/2)
+                linear_extrude(height=t)
+                    text(char, font=font, halign="center");
     pair_of_eyes();
 }
 
@@ -38,4 +39,5 @@ module pair_of_eyes() {
 }
 
 char = "€";
-character(char);
+char_color = "red";
+character(char, char_color);

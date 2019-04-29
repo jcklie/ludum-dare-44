@@ -2,10 +2,10 @@ import os
 
 import delegator
 
-characters = {"€": "eur",
-              "$": "usd",
-              "£": "gbp",
-              "¥": "yen"}
+characters = {"eur": ("€", "[0, 0, 1.0]"),
+              "usd": ("$", "[0, 1.0, 0]"),
+              "gbp": ("£", "[1.0, 0.65, 0]"),
+              "yen": ("¥", "[0.63, 0.14, 0.94]")}
 
 scad_filename = os.path.abspath("character.scad")
 camera_rot_x_steps = 16
@@ -15,7 +15,7 @@ camera_dist = 36
 image_size = 256
 output_folder = os.path.abspath(os.path.join("..", "..", "player", "skin"))
 
-for char, name in characters.items():
+for name, (char, color) in characters.items():
     skin_anim_path = os.path.join(output_folder, name, "idle")
     os.makedirs(skin_anim_path, exist_ok=True)
 
@@ -23,6 +23,7 @@ for char, name in characters.items():
         output_filename = os.path.join(skin_anim_path, f"{ang_step}.png")
 
         parameters = {"char": '\"' + char + '\"',
+                      "char_color": color,
                       "$fn": 100}
 
         parameter_string = "\'" + ";".join([k + "=" + str(v) for k,v in parameters.items()]) + "\'"
