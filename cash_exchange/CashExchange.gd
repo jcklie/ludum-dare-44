@@ -78,7 +78,7 @@ func _change_state(new_state):
 	
 func _start_exchange(player_id):
 	var player_obj = GameManager.players[player_id]
-	
+	$TransParticles.emitting = true
 	player_id_in_exchange = player_id
 
 	# make player immobile, invincible and put to center of shop
@@ -102,6 +102,7 @@ func _close_shop():
 	player_obj.invincible = false
 	player_obj.velocity *= -1
 	player_obj.dash()
+	$TransParticles.emitting = false
 	
 	# while closed, the shop should be solid on the outside
 	$StaticBody2D/OutsideShopCollider.disabled = false
