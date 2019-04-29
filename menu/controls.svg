@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1024"
+   height="576"
+   viewBox="0 0 270.93333 152.4"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 5da689c313, 2019-01-14"
+   sodipodi:docname="controls.svg"
+   inkscape:export-filename="/home/klie/git/ludum-dare-44/menu/controls_map.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="789.08421"
+     inkscape:cy="463.97731"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="2560"
+     inkscape:window-height="1312"
+     inkscape:window-x="0"
+     inkscape:window-y="60"
+     inkscape:window-maximized="1"
+     inkscape:lockguides="true" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-144.59998)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="8.2853556"
+       y="169.77969"
+       id="text817"><tspan
+         sodipodi:role="line"
+         id="tspan815"
+         x="8.2853556"
+         y="169.77969"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.45833397px;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332">controls</tspan></text>
+    <text
+       id="text825"
+       y="191.47523"
+       x="56.968719"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.875px;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332"
+         y="191.47523"
+         x="56.968719"
+         id="tspan823"
+         sodipodi:role="line"> player 1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="160.00485"
+       y="191.47523"
+       id="text829"><tspan
+         sodipodi:role="line"
+         x="160.00485"
+         y="191.47523"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.875px;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332"
+         id="tspan876">player 2&amp;3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="2.9936886"
+       y="245.22307"
+       id="text833"><tspan
+         sodipodi:role="line"
+         id="tspan831"
+         x="2.9936886"
+         y="245.22307"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.34722233px;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332">shoot</tspan></text>
+    <text
+       id="text837"
+       y="227.34453"
+       x="2.9936886"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.34722233px;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332"
+         y="227.34453"
+         x="2.9936886"
+         id="tspan835"
+         sodipodi:role="line">aim</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="2.9936886"
+       y="262.38284"
+       id="text870"><tspan
+         sodipodi:role="line"
+         id="tspan868"
+         x="2.9936886"
+         y="262.38284"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.34722233px;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332">dash</tspan></text>
+    <text
+       id="text874"
+       y="212.64165"
+       x="2.9936886"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.34722233px;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332"
+         y="212.64165"
+         x="2.9936886"
+         id="tspan872"
+         sodipodi:role="line">move</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="2.9936886"
+       y="279.84561"
+       id="text901"><tspan
+         sodipodi:role="line"
+         x="2.9936886"
+         y="279.84561"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.34722233px;line-height:1;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332"
+         id="tspan903">swap </tspan><tspan
+         sodipodi:role="line"
+         x="2.9936886"
+         y="292.19284"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.34722233px;line-height:1;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332"
+         id="tspan907">weapon</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="65.170769"
+       y="212.64165"
+       id="text919"><tspan
+         sodipodi:role="line"
+         id="tspan917"
+         x="65.170769"
+         y="212.64165"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332">wasd</tspan></text>
+    <text
+       id="text923"
+       y="212.64165"
+       x="173.08298"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332"
+         y="212.64165"
+         x="173.08298"
+         id="tspan921"
+         sodipodi:role="line">left stick</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="66.49369"
+       y="227.34453"
+       id="text931"><tspan
+         sodipodi:role="line"
+         id="tspan929"
+         x="66.49369"
+         y="227.34453"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332">mouse</tspan></text>
+    <text
+       id="text935"
+       y="227.34453"
+       x="173.46095"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332"
+         y="227.34453"
+         x="173.46095"
+         id="tspan933"
+         sodipodi:role="line">right stick</tspan></text>
+    <text
+       id="text939"
+       y="244.54245"
+       x="66.49369"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332"
+         y="244.54245"
+         x="66.49369"
+         id="tspan937"
+         sodipodi:role="line">l mouse</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="173.46095"
+       y="244.54243"
+       id="text943"><tspan
+         sodipodi:role="line"
+         id="tspan941"
+         x="173.46095"
+         y="244.54243"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332">r2</tspan></text>
+    <text
+       id="text947"
+       y="259.66138"
+       x="173.46095"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332"
+         y="259.66138"
+         x="173.46095"
+         id="tspan945"
+         sodipodi:role="line">l1 &amp; r1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="66.49369"
+       y="261.17331"
+       id="text955"><tspan
+         sodipodi:role="line"
+         id="tspan953"
+         x="66.49369"
+         y="261.17331"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332">r mouse</tspan></text>
+    <text
+       id="text959"
+       y="280.26111"
+       x="66.49369"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332"
+         y="280.26111"
+         x="66.49369"
+         id="tspan957"
+         sodipodi:role="line">tab &amp; r</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="173.64995"
+       y="280.26111"
+       id="text963"><tspan
+         sodipodi:role="line"
+         id="tspan961"
+         x="173.64995"
+         y="280.26111"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332">l2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="63.228065"
+       y="198.09015"
+       id="text967"><tspan
+         sodipodi:role="line"
+         id="tspan965"
+         x="63.228065"
+         y="198.09015"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332">mouse &amp; keyboard</tspan></text>
+    <text
+       id="text971"
+       y="198.09015"
+       x="160.70813"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332"
+         y="198.09015"
+         x="160.70813"
+         id="tspan969"
+         sodipodi:role="line">controller</tspan></text>
+    <text
+       id="text975"
+       y="154.62256"
+       x="194.96764"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         id="tspan973"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:0.5;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332"
+         y="154.62256"
+         x="194.96764"
+         sodipodi:role="line">Press &quot;ESC&quot; to </tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:0.5;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332"
+         y="167.85173"
+         x="194.96764"
+         sodipodi:role="line"
+         id="tspan977" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="194.96764"
+       y="163.08911"
+       id="text983"><tspan
+         sodipodi:role="line"
+         x="194.96764"
+         y="163.08911"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:0.5;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332"
+         id="tspan979">go back to Menu</tspan><tspan
+         id="tspan981"
+         sodipodi:role="line"
+         x="194.96764"
+         y="176.31828"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:0.5;font-family:'Cash Currency';-inkscape-font-specification:'Cash Currency';stroke-width:0.26458332" /></text>
+  </g>
+</svg>
