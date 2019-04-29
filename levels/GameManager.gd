@@ -5,6 +5,7 @@ var levels = [
 	# preload("res://levels/EmptyArena.tscn"),
 	preload("res://levels/BlockFortKnox.tscn"),
 	preload("res://levels/MyFirstMap.tscn"),
+	preload("res://levels/SmallRiver.tscn"),
 ]
 
 var level_class = "res://levels/Level.tscn"
@@ -30,6 +31,7 @@ func _ready():
 	connect("game_over", AudioEngine, "_on_game_over")
 
 func start_random_level():
+	seed(OS.get_system_time_msecs())
 	var next_level_idx = get_random_map_idx()
 	last_map_idx = next_level_idx
 	
